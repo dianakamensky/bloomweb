@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { getPosts, createPost } from "../../api";
-import Post from "../components/post";
+import Posts from "../components/Posts/posts";
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
@@ -17,10 +17,8 @@ export default function Index() {
   const posts = useLoaderData();
 
   return (
-    <div>
-      {posts.map((post) => (
-        <Post post={post} key={post.id}></Post>
-      ))}
+    <div className="index">
+      <Posts posts={posts}></Posts>
     </div>
   );
 }

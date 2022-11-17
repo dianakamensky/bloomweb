@@ -1,0 +1,44 @@
+.header {
+  margin-top: 0;
+  width: 100%;
+  background-color: var(--dark);
+  color: var(--light);
+  display: flex;
+  column-gap: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header__main {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo {
+    color: var(--light);
+    text-decoration-line: none;
+}
+
+.header__nav {
+  margin-right: 2%;
+  display: flex;
+  margin: 0;
+}
+
+.header__nav-link {
+  text-decoration: none;
+  color: var(--light);
+  padding: 10px;
+}
+
+.header__nav-link:last-child {
+    border: 1px solid white;
+    border-radius: 10%;
+}
+
+.header__search-button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-image: url("https://i0.wp.com/www.thinkafrica.fi/wp-content/uploads/2019/04/search-icon.png.jpg?fit=840%2C678&ssl=1");
+}

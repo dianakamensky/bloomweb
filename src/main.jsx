@@ -5,6 +5,9 @@ import "./index.css";
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
 import Index, {loader as indexLoader, action as indexAction } from "./routes/index";
+import Profile, {loader as profileLoader} from "./routes/profile";
+import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/signup";
+import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,23 @@ const router = createBrowserRouter([
             loader: indexLoader,
             action: indexAction,
           },
+          {
+            path: "/profile",
+            element: <Profile />,
+            loader: profileLoader
+          },
+          {
+            path: "/signup",
+            element: <SignUp/>,
+            loader: signUpLoader,
+            action: signUpAction
+          },
+          {
+            path: "/signin",
+            element: <SignIn/>,
+            loader: signInLoader,
+            action: signInAction
+          }
         ],
       },
     ],

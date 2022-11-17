@@ -1,0 +1,36 @@
+.commentform {
+  position: absolute;
+  bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 15px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.commentform__submit {
+  background-color: var(--light);
+  border: none;
+  color: var(--dark);
+  padding: 5px;
+  font-weight: 900;
+  border-radius: 10px;
+  font-size: inherit;
+}
+
+.commentform__submit:hover {
+  cursor: pointer;
+}
+
+.commentform__input {
+  background-color: var(--dark);
+  outline: none;
+  border: none;
+  padding: 5px;
+  color: var(--light);
+  font-size: inherit;
+}
+
+.commentform__input::placeholder {
+    color: var(--light);
+}

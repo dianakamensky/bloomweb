@@ -1,14 +1,17 @@
-import "./createpopup.css";
+import { Form } from "react-router-dom";
+import React from "react";
 
-export default function createPost({ onClose, isOpen }) {
+export default function createPopup({ onClose, isOpen }) {
+
+
   return (
     <div className={`popup ${isOpen && "popup_open"}`}>
-      <div className="createpopup">
+      <div className="popup__main">
         <button className="popup__close-btn" onClick={onClose}></button>
-        <h1 className="createpopup__title">Share an image</h1>
-        <form className="createpopup__form">
+        <h1 className="popup__title">Share an image</h1>
+        <Form className="popup__form" method="post">
           <input
-            className="createpopup__input"
+            className="input"
             type="link"
             placeholder="Image link"
             name="image"
@@ -16,7 +19,7 @@ export default function createPost({ onClose, isOpen }) {
             required
           ></input>
            <input
-            className="createpopup__input"
+            className="input"
             type="text"
             placeholder="Location"
             name="location"
@@ -24,7 +27,7 @@ export default function createPost({ onClose, isOpen }) {
             required
           ></input>
            <input
-            className="createpopup__input"
+            className="input"
             type="date"
             placeholder="Date"
             name="date"
@@ -32,13 +35,14 @@ export default function createPost({ onClose, isOpen }) {
             required
           ></input>
            <input
-            className="createpopup__input"
+            className="input"
             type="text"
             placeholder="Type of flower"
             name="flower"
             id="flower"
           ></input>
-        </form>
+          <button className="popup__submitbtn" type="submit">Post</button>
+        </Form>
       </div>
     </div>
   );

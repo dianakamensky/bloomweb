@@ -7,9 +7,10 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router-dom";
-import { useEffect } from "react";
-import Header from "../components/Header/header";
-import Footer from "../components/Footer/footer";
+import "../styles/root.css";
+import Header from "../components/header";
+import Footer from "../components/footer";
+
 
 export default function Root() {
   return (

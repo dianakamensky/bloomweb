@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../signin.css";
 
 export function action() {}
 
@@ -28,7 +27,7 @@ export default function Signup() {
       <h1 className="signin__title">Sign up to BloomWeb.</h1>
       <form className="signin__form">
         <input
-          className="signin__input"
+          className="input"
           type="email"
           placeholder="Email"
           name="email"
@@ -38,7 +37,7 @@ export default function Signup() {
           required
         />
         <input
-          className="signin__input"
+          className="input"
           type="text"
           placeholder="Username"
           name="username"
@@ -48,7 +47,7 @@ export default function Signup() {
           required
         />
         <input
-          className="signin__input"
+          className="input"
           type="password"
           placeholder="Password"
           name="password"
@@ -57,7 +56,7 @@ export default function Signup() {
           value={password}
           required
         />
-        <button className="signin__button" type="submit">Sign up</button>
+        <button className="submitbtn" type="submit">Sign up</button>
         <span className="signin__alt">Or <Link to="/signin" className="signin__alt-link">sign in</Link></span>
       </form>
     </main>

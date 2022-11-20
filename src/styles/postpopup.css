@@ -1,0 +1,47 @@
+.postpopup {
+  width: 80%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  height: min-content;
+  align-self: center;
+}
+
+.postpopup__main {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  max-width: 50%;
+  min-width: 50%;
+}
+
+.postpopup__img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.postpopup__bottom {
+  display: flex;
+  justify-content: space-between;
+  color: var(--light);
+}
+
+.postpopup__sidebar {
+  width: 50%;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.postpopup__sidebar-info {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--light);
+}
+
+.postpopup__sidebar-actions {
+    display: flex;
+    align-items: center;
+}
+
+

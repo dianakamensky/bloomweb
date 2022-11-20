@@ -1,4 +1,4 @@
-import "../Header/header.css";
+
 import { useLocation, Link } from "react-router-dom";
 
 export default function Header() {
@@ -8,8 +8,6 @@ export default function Header() {
     return (
         <div className="header">
             <div className="header__main">
-            <button className="header__search-button">
-            </button>
         <Link to="/" className="header__logo"><h1>BloomWeb</h1></Link>
         </div>
         <nav className="header__nav">

@@ -1,4 +1,4 @@
-import "./commentform.css";
+
 
 export default function CommentForm() {
   return (

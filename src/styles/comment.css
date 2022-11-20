@@ -1,6 +1,11 @@
+.comments {
+    overflow-y: auto;
+    height: 100%;
+}
+
 .comment {
     display: flex;
-    margin: 20px 10px 20px 10px;
+    margin: 20px 20px 20px 10px;
     height: min-content;
 }
 
@@ -15,7 +20,7 @@
 
 .comment__text {
     display: flex;
-    column-gap: 5px;
+    flex-direction: column;
     margin-left: 5px;
     align-self: center;
     font-size: 15px;

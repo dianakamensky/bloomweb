@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter");
+@import url("./popup.css");
+@import url("./input.css");
+@import url("./comment.css");
+@import url("./commentform.css");
+@import url("./createpopup.css");
+@import url("./footer.css");
+@import url("./header.css");
+@import url("./post.css");
+@import url("./postpopup.css");
+@import url("./posts.css");
+@import url("./profile.css");
+@import url("./searchform.css");
+@import url("./signin.css");
+@import url("./body.css");
+
+
+:root {
+    --dark: #B22222;
+    --light: #FFE4E1;
+    
+   }
+
+   #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+   }

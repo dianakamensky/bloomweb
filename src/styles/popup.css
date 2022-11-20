@@ -22,31 +22,24 @@
   z-index: 2;
 }
 
-.postpopup {
-  width: 80%;
-  display: flex;
+.popup__main {
+  align-self: center;
   position: relative;
-  justify-content: center;
-  height: min-content;
-  align-self: center;
+  background-color: var(--dark);
+  width: 400px;
+  border-radius: 10px;
 }
 
-.postpopup__main {
-  display: flex;
-  align-self: center;
-  flex-direction: column;
-  max-width: 50%;
-}
-
-.postpopup__img {
-  object-fit: cover;
-  width: 100%;
-}
-
-.postpopup__bottom {
-  display: flex;
-  justify-content: space-between;
+.popup__title {
   color: var(--light);
+  margin-left: 15px;
+}
+
+.popup__form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin: 10px 15px 25px 15px;
 }
 
 .popup__close-btn {
@@ -58,7 +51,7 @@
   border: none;
   height: 28px;
   width: 28px;
-  background-image: url("../../images/closeicon.svg");
+  background-image: url("../images/closeicon.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -68,20 +61,18 @@
   cursor: pointer;
 }
 
-.postpopup__sidebar {
-  width: 50%;
+.popup__submitbtn {
   background-color: var(--dark);
-  display: flex;
-  flex-direction: column;
+  color: var(--light);
+  border: 1px solid var(--light);
+  height: 40px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 17px;
+  margin: none;
 }
 
-.postpopup__sidebar-info {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--light);
+.popup__submitbtn:hover {
+  cursor: pointer;
 }
 
-.postpopup__sidebar-actions {
-    display: flex;
-    align-items: center;
-}

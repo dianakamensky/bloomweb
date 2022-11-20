@@ -1,9 +1,0 @@
-.posts__images {
-    margin: 30px 0 80px auto;
-    display: flex;
-    justify-content: left;
-    width: 90%;
-    row-gap: 30px;
-    column-gap: 30px;
-    flex-wrap: wrap;
-}

@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import "./index.css";
+
 import Root from "./routes/root";
-import ErrorPage from "./error-page";
-import Index, {loader as indexLoader, action as indexAction } from "./routes/index";
-import Profile, {loader as profileLoader} from "./routes/profile";
+import ErrorPage from "./components/error-page";
+import Index, {loader as indexLoader } from "./routes/index";
+import Profile, {loader as profileLoader, action as profileAction} from "./routes/profile";
 import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/signup";
 import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
 
@@ -21,12 +21,12 @@ const router = createBrowserRouter([
             index: true,
             element: <Index />,
             loader: indexLoader,
-            action: indexAction,
           },
           {
             path: "/profile",
             element: <Profile />,
-            loader: profileLoader
+            loader: profileLoader,
+            action: profileAction
           },
           {
             path: "/signup",

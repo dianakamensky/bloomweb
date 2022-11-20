@@ -1,23 +1,25 @@
 import { useLoaderData } from "react-router-dom";
-import { getPosts, createPost } from "../../api";
-import Posts from "../components/Posts/posts";
+import { getPosts, createPost } from "../api";
+import SearchForm from "../components/searchform";
+import Posts from "../components/posts";
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
   return posts;
 }
 
-export async function action({ params, request }) {
-  let formData = await request.formData();
-  const info = Object.fromEntries(formData);
-  await createPost(info);
-}
+
 
 export default function Index() {
   const posts = useLoaderData();
 
   return (
     <div className="index">
+      <SearchForm>
+        <input className="input" placeholder="Flower" type="text" />
+        <input className="input" placeholder="Location" type="text" />
+        <input className="input" placeholder="Date" type="date" />
+      </SearchForm>
       <Posts posts={posts}></Posts>
     </div>
   );

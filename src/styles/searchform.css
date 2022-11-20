@@ -1,0 +1,12 @@
+.searchform {
+    display: flex;
+    column-gap: 30px;
+    justify-content: center;
+    margin-top: 50px;
+    justify-self: center;
+}
+
+
+.searchform__caption {
+    font-size: 30px;
+}

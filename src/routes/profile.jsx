@@ -1,18 +1,27 @@
-import "../profile.css";
 import { useLoaderData } from "react-router-dom";
 import React from "react";
-import Posts from "../components/Posts/posts";
-import { getPosts } from "../../api";
-import CreatePopup from "../components/CreatePopup/createpopup";
+import Posts from "../components/posts";
+import { getPosts, createPost } from "../api";
+import CreatePopup from "../components/createpopup";
+
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
   return posts;
 }
 
+export async function action({ params, request }) {
+  let formData = await request.formData();
+  const info = Object.fromEntries(formData);
+  return await createPost(info);
+  }
+
+
 export default function Profile() {
-  const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
+
+  const errors = useActionData();
   const myposts = useLoaderData();
+  const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
 
   function toggleCreatePopup() {
     setIsCreatePopupOpen(!isCreatePopupOpen);
@@ -57,10 +66,7 @@ export default function Profile() {
       <div className="profile__posts">
         <Posts posts={myposts}></Posts>
       </div>
-      <CreatePopup
-          onClose={toggleCreatePopup}
-          isOpen={isCreatePopupOpen}
-        ></CreatePopup>
+        <CreatePopup onClose={toggleCreatePopup} isOpen={isCreatePopupOpen}></CreatePopup>
     </main>
   );
 }

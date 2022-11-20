@@ -1,9 +1,8 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useActionData } from "react-router-dom";
 import React from "react";
 import Posts from "../components/posts";
 import { getPosts, createPost } from "../api";
 import CreatePopup from "../components/createpopup";
-
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
@@ -14,17 +13,23 @@ export async function action({ params, request }) {
   let formData = await request.formData();
   const info = Object.fromEntries(formData);
   return await createPost(info);
-  }
-
+}
 
 export default function Profile() {
-
-  const errors = useActionData();
+  const response = useActionData();
   const myposts = useLoaderData();
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
 
-  function toggleCreatePopup() {
-    setIsCreatePopupOpen(!isCreatePopupOpen);
+  if (response?.ok && isCreatePopupOpen) {
+    setIsCreatePopupOpen(false);
+  }
+
+  function closeCreatePopup() {
+    setIsCreatePopupOpen(false);
+  }
+
+  function openCreatePopup() {
+    setIsCreatePopupOpen(true);
   }
 
   let username = "Diana";
@@ -47,7 +52,7 @@ export default function Profile() {
             <button
               type="button"
               className="profile__btn"
-              onClick={toggleCreatePopup}
+              onClick={openCreatePopup}
             >
               <img className="profile__icon" src=""></img>
             </button>
@@ -66,7 +71,10 @@ export default function Profile() {
       <div className="profile__posts">
         <Posts posts={myposts}></Posts>
       </div>
-        <CreatePopup onClose={toggleCreatePopup} isOpen={isCreatePopupOpen}></CreatePopup>
+      <CreatePopup
+        onClose={closeCreatePopup}
+        isOpen={isCreatePopupOpen}
+      ></CreatePopup>
     </main>
   );
 }

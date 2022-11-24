@@ -8,6 +8,8 @@ import Index, {loader as indexLoader } from "./routes/index";
 import Profile, {loader as profileLoader, action as profileAction} from "./routes/profile";
 import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/signup";
 import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
+import { action as postCommentAction } from "./routes/postcomment";
+import {action as savePostAction} from "./routes/savepost";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
             element: <SignIn/>,
             loader: signInLoader,
             action: signInAction
+          },
+          {
+            path: "/:postid/comment",
+            action: postCommentAction,
+          },
+          {
+            path: "/:postid/save",
+            action: savePostAction,
           }
         ],
       },

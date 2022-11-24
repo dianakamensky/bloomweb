@@ -3,6 +3,7 @@ import React from "react";
 import Posts from "../components/posts";
 import { getPosts, createPost } from "../api";
 import CreatePopup from "../components/createpopup";
+import { redirect } from "react-router-dom";
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
@@ -16,13 +17,11 @@ export async function action({ params, request }) {
 }
 
 export default function Profile() {
-  const response = useActionData();
+  let response = useActionData();
   const myposts = useLoaderData();
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
 
-  if (response?.ok && isCreatePopupOpen) {
-    setIsCreatePopupOpen(false);
-  }
+ 
 
   function closeCreatePopup() {
     setIsCreatePopupOpen(false);
@@ -68,6 +67,10 @@ export default function Profile() {
           </div>
         )}
       </div>
+      <nav className="profile__nav">
+        <button className="profile__nav-btn">Your posts</button>
+        <button className="profile__nav-btn">Saved</button>
+      </nav>
       <div className="profile__posts">
         <Posts posts={myposts}></Posts>
       </div>

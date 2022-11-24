@@ -9,7 +9,7 @@ export default function createPopup({ onClose, isOpen }) {
       <div className="popup__main">
         <button className="popup__close-btn" onClick={onClose}></button>
         <h1 className="popup__title">Share an image</h1>
-        <Form className="popup__form" method="post">
+        <Form className="popup__form" method="post" onSubmit={onClose}>
           <input
             className="input"
             type="link"

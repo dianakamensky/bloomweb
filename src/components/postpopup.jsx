@@ -1,10 +1,13 @@
 import React from "react";
+import { postComment } from "../api";
 import Comment from "./comment";
 import CommentForm from "./commentform";
+import SaveButton from "./savebutton";
 
 export default function PostPopup({ post, onClose, comments }) {
     const popupEl = React.useRef(null);
     const imgEl = React.useRef(null);
+
 React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHeight}px`}, []);
   return (
     <div className="popup popup_open">
@@ -20,16 +23,14 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
             userId={post.ownerId}
             content={`${post.flower}, ${post.location}, ${post.date}`}
           ></Comment>
-           <div className="postpopup__sidebar-actions">
-              <button className="postpopup__btn"></button>
-            </div>
+           <SaveButton postId={post.id}/>
 </div>
           <div className="comments">
             {comments.map((comment) => (
-              <Comment userId={comment.ownerId} content={comment.content}></Comment>
+              <Comment key={comment.id} userId={comment.ownerId} content={comment.content}></Comment>
             ))}
           </div>
-          <CommentForm></CommentForm>
+          <CommentForm postId={post.id}></CommentForm>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import { json } from "react-router-dom";
+
 export class Api {
   constructor({ baseUrl, headers }) {
     this._url = baseUrl;
@@ -25,6 +27,7 @@ export class Api {
 }
 
 let currentOwnerId = 0;
+let currentCommentId = 7;
 let posts = [
   {
     image:
@@ -32,7 +35,7 @@ let posts = [
     date: "03.05.2012",
     location: "Val d'Orcia",
     flower: "Poppies",
-    id: 2,
+    id: 0,
     ownerId: 3,
     comments: []
   },
@@ -42,17 +45,20 @@ let posts = [
     date: "15.04.2014",
     location: "Bellagio",
     flower: "Wisteria",
-    id: 5,
+    id: 1,
     ownerId: 2,
     comments: [
       {
+        id: 3,
         ownerId: 1,
         content: "jsdfhjghlaughiwrhjsdfhjghlaughiwrhawhjavhaghqawrajjsdfhjghlaughiwrhawhjavhaghqawrsdfhjghlaughiwrhawhjavhaghqawrwhjavhaghqawrjsdfhjghlaughiwrhawhjavhaghqawr"
       },
       {
+        id: 4,
         ownerId: 3,
       },
       {
+        id: 5,
         ownerId: 2,
       },
     ],
@@ -63,19 +69,23 @@ let posts = [
     date: "01.03.2016",
     location: "Antelope valley",
     flower: "Poppies",
-    id: 6,
+    id: 2,
     ownerId: 1,
     comments: [
       {
         ownerId: 1,
         content: "hi",
+        id: 0
       },
       {
         ownerId: 2,
-        content: "byebyebyeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        content: "byebyebyeeeeeeeeeeeeeeeeeeeeeeee",
+        id: 1
       },
       {
-        ownerId: 3
+        ownerId: 3,
+        content: "ugaaaaaaaaaaaa",
+        id: 2
       },
     ],
   },
@@ -85,7 +95,7 @@ let posts = [
     date: "10.07.2020",
     location: "Valensole",
     flower: "Lavender",
-    id: 56,
+    id: 3,
     ownerId: 0,
     comments: [],
   },
@@ -95,22 +105,26 @@ let users = [
   {
     username: "Diana",
     pfp: "https://www.creativefabrica.com/wp-content/uploads/2021/07/07/1625642389/Fairy-silhouette-580x386.jpg",
-    id: 0
+    id: 0,
+    savedPosts: new Set()
   },
   {
     username: "Moshe",
     pfp: "https://tools.bard.edu/wwwmedia/pubs/articles/images/1206826/The-Moon-Fairy-Samatar.png",
-    id: 1
+    id: 1,
+    savedPosts: new Set()
   },  
   {
     username: "Lavie",
     pfp: "",
-    id: 2
+    id: 2,
+    savedPosts: new Set()
   },
   {
     username: "Matan",
     pfp: "",
-    id: 3
+    id: 3,
+    savedPosts: new Set()
   },
 ]
 
@@ -121,14 +135,22 @@ export  async function createPost(info) {
   info.ownerId = currentOwnerId;
   info.comments = [];
   posts.push(info);
-  return {ok:true};
+  return json({info});
+}
+
+export async function postComment(comment, postId) {
+  const post = posts.find(post => post.id==postId);
+  const newComment = {id: currentCommentId, content: comment.comment, ownerId: currentOwnerId};
+  post.comments.push(newComment);
+  currentCommentId += 1;
+  return json(newComment);
 }
 
 export async function getPosts() {
   return posts;
 }
 
-export async function getUser(id) {
+export async function getUser(id=currentOwnerId) {
   return users[id];
 }
 
@@ -136,3 +158,9 @@ export async function signUp(email, username, password) {
   return this._request("signup", "POST", { password, email, username });
 }
 
+export async function savePost(data, postId, userId) {
+  if (data.save === "true") {
+    users[userId].savedPosts.add(Number(postId));
+  }
+  else users[userId].savedPosts.delete(Number(postId));
+}

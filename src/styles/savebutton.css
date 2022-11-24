@@ -1,0 +1,11 @@
+.savebutton {
+    background-image: url("../images/save.svg");
+    width: 20px;
+}
+
+.savebutton_active {
+    background-image: url("../images/saved.svg");
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+}

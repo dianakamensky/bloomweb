@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { getPosts, createPost } from "../api";
+import { getPosts } from "../api";
 import SearchForm from "../components/searchform";
 import Posts from "../components/posts";
 

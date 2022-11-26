@@ -22,3 +22,8 @@ input[type="date"] {
   font-weight: 800;
   padding-left: 5px;
 }
+
+.dateinput {
+  display: flex;
+  column-gap: 10px;
+}

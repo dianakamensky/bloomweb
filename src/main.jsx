@@ -9,7 +9,7 @@ import Profile, {loader as profileLoader, action as profileAction} from "./route
 import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/signup";
 import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
 import { action as postCommentAction } from "./routes/postcomment";
-import {action as savePostAction} from "./routes/savepost";
+import {action as savePostAction} from "./components/savebutton";
 import MyPosts, {loader as myPostsLoader} from "./routes/myposts";
 import Saved, {loader as savedLoader} from "./routes/saved";
 

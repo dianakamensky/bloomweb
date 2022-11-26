@@ -3,8 +3,10 @@ import { postComment } from "../api";
 import Comment from "./comment";
 import CommentForm from "./commentform";
 import SaveButton from "./savebutton";
+import { CurrentUserContext } from "../routes/root";
 
 export default function PostPopup({ post, onClose, comments }) {
+  const currentUser = React.useContext(CurrentUserContext);
     const popupEl = React.useRef(null);
     const imgEl = React.useRef(null);
 
@@ -23,7 +25,8 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
             userId={post.ownerId}
             content={`${post.flower}, ${post.location}, ${post.date}`}
           ></Comment>
-           <SaveButton postId={post.id}/>
+          {currentUser && currentUser.id != post.ownerId &&
+           <SaveButton postId={post.id}/>}
 </div>
           <div className="comments">
             {comments.map((comment) => (

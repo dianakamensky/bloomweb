@@ -1,6 +1,12 @@
 import { useFetcher } from "react-router-dom";
 import { CurrentUserContext } from "../routes/root";
 import React from "react";
+import { savePost } from "../api";
+
+export async function action({ params, request }) {
+  const data = Object.fromEntries(await request.formData());
+  await savePost(data, params.postid, data.userid);
+}
 
 export default function SaveButton({ postId }) {
   const fetcher = useFetcher();

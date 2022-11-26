@@ -1,11 +1,11 @@
-
+import { Form } from "react-router-dom";
 import React from "react";
 
 export default function SearchForm({children}) {
   return (
-  <form className="searchform">
+  <Form className="searchform" id="searchform" role="search">
       {children}
     <button className="searchform__button"></button>
-  </form>
+  </Form>
   )
 }

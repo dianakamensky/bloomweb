@@ -33,7 +33,7 @@ let posts = [
   {
     image:
       "https://res.cloudinary.com/fleetnation/image/private/c_fit,w_1120/g_south,l_text:style_gothic2:%C2%A9%20Frank%20Bienewald%20,o_20,y_10/g_center,l_watermark4,o_25,y_50/v1550055652/wmfy2jlwpwdenepocvwd.jpg",
-    date: "03.05.2012",
+    date: new Date('May 5, 2005'),
     location: "Val d'Orcia",
     flower: "Poppies",
     id: 0,
@@ -43,7 +43,7 @@ let posts = [
   {
     image:
       "https://as2.ftcdn.net/v2/jpg/02/35/92/41/500_F_235924153_5SOFEtzFcgXtiRJIXyeJA6WfKoDIYYNU.jpg",
-    date: "15.04.2014",
+    date: new Date('April 15, 2023'),
     location: "Bellagio",
     flower: "Wisteria",
     id: 1,
@@ -68,7 +68,7 @@ let posts = [
   {
     image:
       "https://www.flyinghighonpoints.com/wp-content/uploads/2020/05/IMG_9542-1-scaled.jpg",
-    date: "01.03.2016",
+    date: new Date('March 21, 2002'),
     location: "Antelope valley",
     flower: "Poppies",
     id: 2,
@@ -94,7 +94,7 @@ let posts = [
   {
     image:
       "https://www.lelongweekend.com/wp-content/uploads/2022/02/DSC04162-scaled.jpg",
-    date: "10.07.2020",
+    date: new Date('July 21, 2003'),
     location: "Valensole",
     flower: "Lavender",
     id: 3,
@@ -157,16 +157,29 @@ export async function getPosts(query) {
     return results;
   }
   if (query.ownerId != undefined) {
-   results = results.filter((post) => post.ownerId === query.ownerId);
+    results = results.filter((post) => post.ownerId === query.ownerId);
   }
   if (query.saverId != undefined) {
-    const saver = (await getUser(query.saverId));
+    const saver = await getUser(query.saverId);
     const savedPosts = saver.savedPosts;
     results = results.filter((post) => savedPosts.has(post.id));
   }
+  if (query.flower != undefined) {
+    results = results.filter((post) => post.flower.toLowerCase().includes(query.flower.toLowerCase()));
+  }
+  if (query.location != undefined) {
+    results = results.filter((post) => post.location.toLowerCase().includes(query.location.toLowerCase()));
+  }
+  if (query.from) {
+    const date = new Date(query.from);
+    results = results.filter((post) => date <= post.date);
+  } 
+  if (query.to) {
+    const date = new Date(query.to);
+    results = results.filter((post) => date >= post.date);
+  }
   return results;
 }
-
 
 export async function getUser(id = getCurrentUser()) {
   return users[id];

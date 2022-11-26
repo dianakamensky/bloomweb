@@ -198,3 +198,10 @@ export async function savePost(data, postId, userId) {
     users[userId].savedPosts.add(Number(postId));
   } else users[userId].savedPosts.delete(Number(postId));
 }
+
+export async function deletePost(postId) {
+  const postIndex = posts.findIndex((post) => post.id === Number(postId));
+  if (postIndex >= 0) {
+    posts.splice(postIndex, 1);
+  }
+}

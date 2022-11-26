@@ -12,6 +12,7 @@ import { action as postCommentAction } from "./routes/postcomment";
 import {action as savePostAction} from "./components/savebutton";
 import MyPosts, {loader as myPostsLoader} from "./routes/myposts";
 import Saved, {loader as savedLoader} from "./routes/saved";
+import {action as deletePostAction} from "./components/deletebutton";
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,11 @@ const router = createBrowserRouter([
           {
             path: "/:postid/save",
             action: savePostAction,
-          }
+          },
+          {
+            path: "/:postid/delete",
+            action: deletePostAction,
+          },
         ],
       },
     ],

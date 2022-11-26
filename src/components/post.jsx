@@ -10,9 +10,12 @@ export default function Post({post, setCurrentPost}) {
 
 
   return (
+    <>
     <div className="post" onClick={openPopup}>
       <img className="post__image" src={post.image}></img>
-      {currentUser && currentUser.id === post.ownerId && <DeleteButton postId={post.id}/>}
+      
     </div>
+    {currentUser && currentUser.id === post.ownerId && <DeleteButton postId={post.id}/>}
+    </>
   );
 }

@@ -10,6 +10,8 @@ import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/s
 import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
 import { action as postCommentAction } from "./routes/postcomment";
 import {action as savePostAction} from "./routes/savepost";
+import MyPosts, {loader as myPostsLoader} from "./routes/myposts";
+import Saved, {loader as savedLoader} from "./routes/saved";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,17 @@ const router = createBrowserRouter([
             path: "/profile",
             element: <Profile />,
             loader: profileLoader,
-            action: profileAction
+            action: profileAction,
+            children: [{
+              index: true,
+              element: <MyPosts/>,
+              loader: myPostsLoader,
+          },
+        {
+          path: "saved",
+          element: <Saved/>,
+          loader: savedLoader
+        }]
           },
           {
             path: "/signup",

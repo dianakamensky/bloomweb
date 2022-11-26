@@ -3,7 +3,6 @@
 @import url("./input.css");
 @import url("./comment.css");
 @import url("./commentform.css");
-@import url("./createpopup.css");
 @import url("./footer.css");
 @import url("./header.css");
 @import url("./post.css");
@@ -19,6 +18,7 @@
 :root {
     --dark: #B22222;
     --light: #FFE4E1;
+    --medium: rgba(178, 34, 34, 0.5);
     
    }
 

@@ -18,15 +18,16 @@ export class Api {
       method,
       headers: allHeaders,
       body: method === "GET" ? null : JSON.stringify(body),
-    })
+    });
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(res);
-  };
+  }
 }
 
 let currentOwnerId = 0;
+localStorage.setItem("userId", currentOwnerId);
 let currentCommentId = 7;
 let posts = [
   {
@@ -37,7 +38,7 @@ let posts = [
     flower: "Poppies",
     id: 0,
     ownerId: 3,
-    comments: []
+    comments: [],
   },
   {
     image:
@@ -51,7 +52,8 @@ let posts = [
       {
         id: 3,
         ownerId: 1,
-        content: "jsdfhjghlaughiwrhjsdfhjghlaughiwrhawhjavhaghqawrajjsdfhjghlaughiwrhawhjavhaghqawrsdfhjghlaughiwrhawhjavhaghqawrwhjavhaghqawrjsdfhjghlaughiwrhawhjavhaghqawr"
+        content:
+          "jsdfhjghlaughiwrhjsdfhjghlaughiwrhawhjavhaghqawrajjsdfhjghlaughiwrhawhjavhaghqawrsdfhjghlaughiwrhawhjavhaghqawrwhjavhaghqawrjsdfhjghlaughiwrhawhjavhaghqawr",
       },
       {
         id: 4,
@@ -75,17 +77,17 @@ let posts = [
       {
         ownerId: 1,
         content: "hi",
-        id: 0
+        id: 0,
       },
       {
         ownerId: 2,
         content: "byebyebyeeeeeeeeeeeeeeeeeeeeeeee",
-        id: 1
+        id: 1,
       },
       {
         ownerId: 3,
         content: "ugaaaaaaaaaaaa",
-        id: 2
+        id: 2,
       },
     ],
   },
@@ -106,52 +108,72 @@ let users = [
     username: "Diana",
     pfp: "https://www.creativefabrica.com/wp-content/uploads/2021/07/07/1625642389/Fairy-silhouette-580x386.jpg",
     id: 0,
-    savedPosts: new Set()
+    savedPosts: new Set(),
   },
   {
     username: "Moshe",
     pfp: "https://tools.bard.edu/wwwmedia/pubs/articles/images/1206826/The-Moon-Fairy-Samatar.png",
     id: 1,
-    savedPosts: new Set()
-  },  
+    savedPosts: new Set(),
+  },
   {
     username: "Lavie",
     pfp: "",
     id: 2,
-    savedPosts: new Set()
+    savedPosts: new Set(),
   },
   {
     username: "Matan",
     pfp: "",
     id: 3,
-    savedPosts: new Set()
+    savedPosts: new Set(),
   },
-]
+];
 
-
-export  async function createPost(info) {
+export async function createPost(info) {
   let newId = Math.max(...posts.map((post) => post.id)) + 1;
   info.id = newId;
   info.ownerId = currentOwnerId;
   info.comments = [];
   posts.push(info);
-  return json({info});
+  return json({ info });
 }
 
 export async function postComment(comment, postId) {
-  const post = posts.find(post => post.id==postId);
-  const newComment = {id: currentCommentId, content: comment.comment, ownerId: currentOwnerId};
+  const post = posts.find((post) => post.id == postId);
+  const newComment = {
+    id: currentCommentId,
+    content: comment.comment,
+    ownerId: currentOwnerId,
+  };
   post.comments.push(newComment);
   currentCommentId += 1;
   return json(newComment);
 }
 
-export async function getPosts() {
-  return posts;
+export async function getPosts(query) {
+  let results = posts;
+  if (!query) {
+    return results;
+  }
+  if (query.ownerId != undefined) {
+   results = results.filter((post) => post.ownerId === query.ownerId);
+  }
+  if (query.saverId != undefined) {
+    const saver = (await getUser(query.saverId));
+    const savedPosts = saver.savedPosts;
+    results = results.filter((post) => savedPosts.has(post.id));
+  }
+  return results;
 }
 
-export async function getUser(id=currentOwnerId) {
+
+export async function getUser(id = getCurrentUser()) {
   return users[id];
+}
+
+export function getCurrentUser() {
+  return Number(localStorage.getItem("userId"));
 }
 
 export async function signUp(email, username, password) {
@@ -161,6 +183,5 @@ export async function signUp(email, username, password) {
 export async function savePost(data, postId, userId) {
   if (data.save === "true") {
     users[userId].savedPosts.add(Number(postId));
-  }
-  else users[userId].savedPosts.delete(Number(postId));
+  } else users[userId].savedPosts.delete(Number(postId));
 }

@@ -9,7 +9,6 @@ export default function Posts({ posts }) {
   }
   return (
     <div className="posts">
-      <div className="posts__images">
         {posts.map((post) => (
           <Post
             post={post}
@@ -17,7 +16,6 @@ export default function Posts({ posts }) {
             setCurrentPost={setCurrentPost}
           ></Post>
         ))}
-      </div>
       {currentPost && (
         <PostPopup
           post={currentPost}

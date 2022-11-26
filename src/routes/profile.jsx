@@ -1,9 +1,8 @@
-import { useLoaderData, useActionData } from "react-router-dom";
+import { useLoaderData, useActionData, NavLink, Outlet } from "react-router-dom";
 import React from "react";
 import Posts from "../components/posts";
 import { getPosts, createPost } from "../api";
 import CreatePopup from "../components/createpopup";
-import { redirect } from "react-router-dom";
 
 export async function loader({ params, request }) {
   const posts = await getPosts();
@@ -16,12 +15,12 @@ export async function action({ params, request }) {
   return await createPost(info);
 }
 
+const saved = true;
+
 export default function Profile() {
   let response = useActionData();
   const myposts = useLoaderData();
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
-
- 
 
   function closeCreatePopup() {
     setIsCreatePopupOpen(false);
@@ -68,12 +67,25 @@ export default function Profile() {
         )}
       </div>
       <nav className="profile__nav">
-        <button className="profile__nav-btn">Your posts</button>
-        <button className="profile__nav-btn">Saved</button>
+        <NavLink end to="/profile"
+          className={({ isActive }) =>
+            `profile__nav-btn ${isActive ? "profile__nav-btn_active" : ""}`
+          }
+        >
+          Your posts
+        </NavLink>
+        <NavLink to="/profile/saved"
+          className={({ isActive }) =>
+            `profile__nav-btn ${isActive ? "profile__nav-btn_active" : ""}`
+          }
+          
+        >
+          Saved
+        </NavLink>
       </nav>
-      <div className="profile__posts">
-        <Posts posts={myposts}></Posts>
-      </div>
+
+        <Outlet/>
+
       <CreatePopup
         onClose={closeCreatePopup}
         isOpen={isCreatePopupOpen}

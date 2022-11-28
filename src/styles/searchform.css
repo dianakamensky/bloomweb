@@ -1,12 +1,49 @@
 .searchform {
-    display: flex;
-    column-gap: 30px;
-    justify-content: center;
-    margin-top: 50px;
-    justify-self: center;
+  display: flex;
+  column-gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+  justify-self: center;
 }
-
 
 .searchform__caption {
-    font-size: 30px;
+  font-size: 30px;
 }
+
+@media all and (min-width: 320px) and (max-width: 439px) {
+  .searchform {
+    flex-direction: column;
+    width: 90%;
+    row-gap: 20px;
+    margin: 20px 5%;
+    position: relative;
+    align-self: center;
+  }
+
+  .searchform__button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@media all and (min-width: 440px) and (max-width: 739px) {
+  .searchform {
+    flex-wrap: wrap;
+    width: 90%;
+    row-gap: 20px;
+    margin: 20px 5%;
+    position: relative;
+    align-self: center;
+  }
+}
+
+@media all and (min-width: 740px) and (max-width: 1000px) {
+    .searchform {
+      width: 80%;
+      column-gap: 10px;
+      margin: 40px 10%;
+      position: relative;
+      align-self: center;
+    }
+  }

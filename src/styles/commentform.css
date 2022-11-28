@@ -37,3 +37,14 @@
 .commentform__input::placeholder {
   color: var(--light);
 }
+
+@media all and (min-width: 320px) and (max-width: 400px) {
+
+  .commentform {
+    justify-content: space-between;
+  }
+  .commentform__input  {
+    width: 70%;
+    padding: 0;
+  }
+}

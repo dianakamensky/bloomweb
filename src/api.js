@@ -26,14 +26,12 @@ export class Api {
   }
 }
 
-let currentOwnerId = 0;
-localStorage.setItem("userId", currentOwnerId);
 let currentCommentId = 7;
 let posts = [
   {
     image:
       "https://res.cloudinary.com/fleetnation/image/private/c_fit,w_1120/g_south,l_text:style_gothic2:%C2%A9%20Frank%20Bienewald%20,o_20,y_10/g_center,l_watermark4,o_25,y_50/v1550055652/wmfy2jlwpwdenepocvwd.jpg",
-    date: new Date('May 5, 2005'),
+    date: new Date("May 5, 2005"),
     location: "Val d'Orcia",
     flower: "Poppies",
     id: 0,
@@ -43,7 +41,7 @@ let posts = [
   {
     image:
       "https://as2.ftcdn.net/v2/jpg/02/35/92/41/500_F_235924153_5SOFEtzFcgXtiRJIXyeJA6WfKoDIYYNU.jpg",
-    date: new Date('April 15, 2023'),
+    date: new Date("April 15, 2023"),
     location: "Bellagio",
     flower: "Wisteria",
     id: 1,
@@ -68,7 +66,7 @@ let posts = [
   {
     image:
       "https://www.flyinghighonpoints.com/wp-content/uploads/2020/05/IMG_9542-1-scaled.jpg",
-    date: new Date('March 21, 2002'),
+    date: new Date("March 21, 2002"),
     location: "Antelope valley",
     flower: "Poppies",
     id: 2,
@@ -81,7 +79,7 @@ let posts = [
       },
       {
         ownerId: 2,
-        content: "byebyebyeeeeeeeeeeeeeeeeeeeeeeee",
+        content: "bubbles",
         id: 1,
       },
       {
@@ -94,7 +92,7 @@ let posts = [
   {
     image:
       "https://www.lelongweekend.com/wp-content/uploads/2022/02/DSC04162-scaled.jpg",
-    date: new Date('July 21, 2003'),
+    date: new Date("July 21, 2003"),
     location: "Valensole",
     flower: "Lavender",
     id: 3,
@@ -106,24 +104,28 @@ let posts = [
 let users = [
   {
     username: "Diana",
+    password: "0",
     pfp: "https://www.creativefabrica.com/wp-content/uploads/2021/07/07/1625642389/Fairy-silhouette-580x386.jpg",
     id: 0,
     savedPosts: new Set(),
   },
   {
     username: "Moshe",
+    password: "1",
     pfp: "https://tools.bard.edu/wwwmedia/pubs/articles/images/1206826/The-Moon-Fairy-Samatar.png",
     id: 1,
     savedPosts: new Set(),
   },
   {
     username: "Lavie",
+    password: "2",
     pfp: "",
     id: 2,
     savedPosts: new Set(),
   },
   {
     username: "Matan",
+    password: "3",
     pfp: "",
     id: 3,
     savedPosts: new Set(),
@@ -133,7 +135,7 @@ let users = [
 export async function createPost(info) {
   let newId = Math.max(...posts.map((post) => post.id)) + 1;
   info.id = newId;
-  info.ownerId = currentOwnerId;
+  info.ownerId = getCurrentUser();
   info.comments = [];
   posts.push(info);
   return json({ info });
@@ -144,7 +146,7 @@ export async function postComment(comment, postId) {
   const newComment = {
     id: currentCommentId,
     content: comment.comment,
-    ownerId: currentOwnerId,
+    ownerId: getCurrentUser(),
   };
   post.comments.push(newComment);
   currentCommentId += 1;
@@ -165,15 +167,19 @@ export async function getPosts(query) {
     results = results.filter((post) => savedPosts.has(post.id));
   }
   if (query.flower != undefined) {
-    results = results.filter((post) => post.flower.toLowerCase().includes(query.flower.toLowerCase()));
+    results = results.filter((post) =>
+      post.flower.toLowerCase().includes(query.flower.toLowerCase())
+    );
   }
   if (query.location != undefined) {
-    results = results.filter((post) => post.location.toLowerCase().includes(query.location.toLowerCase()));
+    results = results.filter((post) =>
+      post.location.toLowerCase().includes(query.location.toLowerCase())
+    );
   }
   if (query.from) {
     const date = new Date(query.from);
     results = results.filter((post) => date <= post.date);
-  } 
+  }
   if (query.to) {
     const date = new Date(query.to);
     results = results.filter((post) => date >= post.date);
@@ -189,8 +195,33 @@ export function getCurrentUser() {
   return Number(localStorage.getItem("userId"));
 }
 
-export async function signUp(email, username, password) {
-  return this._request("signup", "POST", { password, email, username });
+export async function signUp(username, password) {
+  //return this._request("signup", "POST", { password, email, username });
+  if (
+    users.some((user) => user.username.toLowerCase() === username.toLowerCase())
+  ) {
+    throw new Error("Username already in use");
+  }
+  if (password.length < 10) {
+    throw new Error("Password is too short");
+  }
+  const newId = Math.max(...users.map((user) => user.id)) + 1;
+  users.push({ username, password, pfp: "", id: newId, savedPosts: new Set() });
+  return json(users[users.length - 1]);
+}
+
+export async function signIn(username, password) {
+  localStorage.setItem("userId", undefined);
+  const user = users.find(
+    (user) => user.username.toLowerCase() === username.toLowerCase()
+  );
+  if (user === undefined) {
+    throw json({ username: "Username doesn't exist" }, { status: 400 });
+  }
+  if (user.password != password) {
+    throw json({ password: "Password is incorrect"}, {status: 400});
+  }
+  localStorage.setItem("userId", user.id);
 }
 
 export async function savePost(data, postId, userId) {

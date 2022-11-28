@@ -52,3 +52,31 @@
     font-weight: 700;
     border-top: 2px solid var(--dark);
 }
+
+
+@media all and (min-width: 320px) and (max-width: 600px) {
+.profile__info {
+    flex-direction:column;
+}
+
+.profile__pic {
+    margin: 0;
+}
+
+.profile__top-section {
+    flex-direction:column;
+    row-gap: 20px;
+}
+
+.profile__name {
+    text-align: center;
+}
+
+.profile__bio {
+    text-align: center;
+}
+
+.profile__btns {
+    flex-direction: row;
+}
+  }

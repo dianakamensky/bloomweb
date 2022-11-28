@@ -18,7 +18,7 @@ export default function SaveButton({ postId }) {
       <button
         name="save"
         value={!saved}
-        className={saved ? "savebutton_active" : "savebutton"}
+        className={`savebutton ${saved ? "savebutton_active" : ""}`}
       ></button>
       <input type="hidden" value={currentUser.id} name="userid"></input>
     </fetcher.Form>

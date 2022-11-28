@@ -1,49 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect, Form } from "react-router-dom";
+import { signUp } from "../api";
 
-export function action() {}
+export async function action({ params, request }) {
+  const data = await request.formData();
+  const objData = Object.fromEntries(data);
+  await signUp(objData.username, objData.password);
+  return redirect("/signin");
+}
 
-export function loader() {}
-
-export default function Signup() {
-  const [email, setEmail] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleUserNameChange(e) {
-    setUsername(e.target.value);
-  }
-
+export default function SignUp() {
   return (
     <main className="signin">
       <h1 className="signin__title">Sign up to BloomWeb.</h1>
-      <form className="signin__form">
-        <input
-          className="input"
-          type="email"
-          placeholder="Email"
-          name="email"
-          id="emailsignup"
-          onChange={handleEmailChange}
-          value={email}
-          required
-        />
+      <Form className="signin__form" method="post">
         <input
           className="input"
           type="text"
           placeholder="Username"
           name="username"
           id="usernamesignup"
-          onChange={handleUserNameChange}
-          value={username}
           required
         />
         <input
@@ -52,13 +28,20 @@ export default function Signup() {
           placeholder="Password"
           name="password"
           id="passwordsignup"
-          onChange={handlePasswordChange}
-          value={password}
+          minLength="7"
+          maxLength="20"
           required
         />
-        <button className="submitbtn" type="submit">Sign up</button>
-        <span className="signin__alt">Or <Link to="/signin" className="signin__alt-link">sign in</Link></span>
-      </form>
+        <button className="submitbtn" type="submit">
+          Sign up
+        </button>
+        <span className="signin__alt">
+          Or{" "}
+          <Link to="/signin" className="signin__alt-link">
+            sign in
+          </Link>
+        </span>
+      </Form>
     </main>
   );
 }

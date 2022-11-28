@@ -5,8 +5,6 @@ import { getPosts, createPost } from "../api";
 import CreatePopup from "../components/createpopup";
 
 export async function loader({ params, request }) {
-  const posts = await getPosts();
-  return posts;
 }
 
 export async function action({ params, request }) {
@@ -19,7 +17,6 @@ const saved = true;
 
 export default function Profile() {
   let response = useActionData();
-  const myposts = useLoaderData();
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
 
   function closeCreatePopup() {

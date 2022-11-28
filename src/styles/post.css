@@ -4,6 +4,7 @@
     background-color: var(--dark);
     color: var(--light);
     border-radius: 5%;
+    position: relative;
 }
 
 .post__image {

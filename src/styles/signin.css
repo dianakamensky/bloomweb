@@ -31,3 +31,9 @@
   color: var(--dark);
   text-decoration: none;
 }
+
+@media all and (min-width: 320px) and (max-width: 900px) {
+ .signin__form {
+  width: 90%;
+ }
+}

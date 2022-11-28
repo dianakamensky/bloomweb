@@ -6,8 +6,8 @@ import Root from "./routes/root";
 import ErrorPage from "./components/error-page";
 import Index, {loader as indexLoader } from "./routes/index";
 import Profile, {loader as profileLoader, action as profileAction} from "./routes/profile";
-import SignUp, {loader as signUpLoader, action as signUpAction} from "./routes/signup";
-import SignIn, {loader as signInLoader, action as signInAction} from "./routes/signin";
+import SignUp, {action as signUpAction} from "./routes/signup";
+import SignIn, {action as signInAction} from "./routes/signin";
 import { action as postCommentAction } from "./routes/postcomment";
 import {action as savePostAction} from "./components/savebutton";
 import MyPosts, {loader as myPostsLoader} from "./routes/myposts";
@@ -46,14 +46,13 @@ const router = createBrowserRouter([
           {
             path: "/signup",
             element: <SignUp/>,
-            loader: signUpLoader,
             action: signUpAction
           },
           {
             path: "/signin",
             element: <SignIn/>,
-            loader: signInLoader,
-            action: signInAction
+            action: signInAction,
+            errorElement: <SignIn/>
           },
           {
             path: "/:postid/comment",

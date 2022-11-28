@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <div className="index">
-      <SearchForm>
+   <SearchForm>
         <input
           className="input"
           placeholder="Flower"

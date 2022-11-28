@@ -14,6 +14,8 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
   return (
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
+      {currentUser && currentUser.id != post.ownerId &&
+           <SaveButton postId={post.id}/>}
         <button className="popup__close-btn" onClick={onClose}></button>
         <div className="postpopup__main">
           <img className="postpopup__img" src={post.image} ref={imgEl}/>
@@ -23,10 +25,9 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
             <div className="postpopup__sidebar-info">
           <Comment
             userId={post.ownerId}
-            content={`${post.flower}, ${post.location}, ${post.date}`}
+            content={`${post.flower}, ${post.location}, ${post.date.toDateString()}`}
           ></Comment>
-          {currentUser && currentUser.id != post.ownerId &&
-           <SaveButton postId={post.id}/>}
+  
 </div>
           <div className="comments">
             {comments.map((comment) => (

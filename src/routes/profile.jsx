@@ -1,10 +1,11 @@
 import { useLoaderData, useActionData, NavLink, Outlet } from "react-router-dom";
 import React from "react";
-import Posts from "../components/posts";
-import { getPosts, createPost } from "../api";
+import EditPopup from "../components/editpopup";
+import { createPost, getUser } from "../api";
 import CreatePopup from "../components/createpopup";
 
 export async function loader({ params, request }) {
+ return getUser();
 }
 
 export async function action({ params, request }) {
@@ -16,8 +17,10 @@ export async function action({ params, request }) {
 const saved = true;
 
 export default function Profile() {
-  let response = useActionData();
+  const response = useActionData();
+  const user = useLoaderData();
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
+  const [isEditPopupOpen, setIsEditPopupOpen] = React.useState(false);
 
   function closeCreatePopup() {
     setIsCreatePopupOpen(false);
@@ -27,38 +30,34 @@ export default function Profile() {
     setIsCreatePopupOpen(true);
   }
 
-  let username = "Diana";
-  let picture =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png";
-  let loggedIn = true;
-  let bio = "Photographer";
+  function closeEditPopup() {
+    setIsEditPopupOpen(false);
+  }
+
+  function openEditPopup() {
+    setIsEditPopupOpen(true);
+  }
+
   return (
     <main className="profile">
       <div className="profile__top-section">
         <div className="profile__info">
-          <img className="profile__pic" src={picture}></img>
+          <img className="profile__pic" src={user.pfp}></img>
           <div>
-            <h2 className="profile__name">{username}</h2>
-            <p className="profile__bio">{bio}</p>
+            <h2 className="profile__name">{user.username}</h2>
+            <p className="profile__bio">{user.bio}</p>
           </div>
         </div>
-        {loggedIn && (
+        {user && (
           <div className="profile__btns">
             <button
               type="button"
               className="profile__btn"
               onClick={openCreatePopup}
-            >
-              <img className="profile__icon" src=""></img>
+            >+
             </button>
-            <button type="button" className="profile__btn">
-              <img className="profile__icon" src=""></img>
-            </button>
-            <button type="button" className="profile__btn">
-              <img className="profile__icon" src=""></img>
-            </button>
-            <button type="button" className="profile__btn">
-              <img className="profile__icon" src=""></img>
+            <button type="button" className="profile__btn" onClick={openEditPopup}>
+            &#x1F589;
             </button>
           </div>
         )}
@@ -86,7 +85,11 @@ export default function Profile() {
       <CreatePopup
         onClose={closeCreatePopup}
         isOpen={isCreatePopupOpen}
-      ></CreatePopup>
+      />
+      <EditPopup
+        onClose={closeEditPopup}
+        isOpen={isEditPopupOpen}
+      />
     </main>
   );
 }

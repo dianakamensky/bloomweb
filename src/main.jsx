@@ -4,15 +4,19 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 import Root from "./routes/root";
 import ErrorPage from "./components/error-page";
-import Index, {loader as indexLoader } from "./routes/index";
-import Profile, {loader as profileLoader, action as profileAction} from "./routes/profile";
-import SignUp, {action as signUpAction} from "./routes/signup";
-import SignIn, {action as signInAction} from "./routes/signin";
+import Index, { loader as indexLoader } from "./routes/index";
+import Profile, {
+  loader as profileLoader,
+  action as profileAction,
+} from "./routes/profile";
+import SignUp, { action as signUpAction } from "./routes/signup";
+import SignIn, { action as signInAction } from "./routes/signin";
 import { action as postCommentAction } from "./routes/postcomment";
-import {action as savePostAction} from "./components/savebutton";
-import MyPosts, {loader as myPostsLoader} from "./routes/myposts";
-import Saved, {loader as savedLoader} from "./routes/saved";
-import {action as deletePostAction} from "./components/deletebutton";
+import { action as savePostAction } from "./components/savebutton";
+import MyPosts, { loader as myPostsLoader } from "./routes/myposts";
+import Saved, { loader as savedLoader } from "./routes/saved";
+import { action as deletePostAction } from "./components/deletebutton";
+import { action as editProfileAction } from "./routes/editprofile";
 
 const router = createBrowserRouter([
   {
@@ -32,27 +36,33 @@ const router = createBrowserRouter([
             element: <Profile />,
             loader: profileLoader,
             action: profileAction,
-            children: [{
-              index: true,
-              element: <MyPosts/>,
-              loader: myPostsLoader,
-          },
-        {
-          path: "saved",
-          element: <Saved/>,
-          loader: savedLoader
-        }]
+            children: [
+              {
+                index: true,
+                element: <MyPosts />,
+                loader: myPostsLoader,
+              },
+              {
+                path: "saved",
+                element: <Saved />,
+                loader: savedLoader,
+              },
+              {
+                path: "edit",
+                action: editProfileAction,
+              }
+            ],
           },
           {
             path: "/signup",
-            element: <SignUp/>,
-            action: signUpAction
+            element: <SignUp />,
+            action: signUpAction,
           },
           {
             path: "/signin",
-            element: <SignIn/>,
+            element: <SignIn />,
             action: signInAction,
-            errorElement: <SignIn/>
+            errorElement: <SignIn />,
           },
           {
             path: "/:postid/comment",

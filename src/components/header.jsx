@@ -1,10 +1,9 @@
 
-import { useLocation, Link } from "react-router-dom";
-import SearchForm from "./searchform";
+import { Link } from "react-router-dom";
+import { getCurrentUser } from "../api";
 
 export default function Header() {
-    let signedIn = false;
-    let location = useLocation();
+    let signedIn = getCurrentUser();
     
     return (
         <div className="header">

@@ -1,7 +1,6 @@
 import { useFetcher } from "react-router-dom";
 import React from "react";
 import { deletePost } from "../api";
-import Trash from "../images/trash.svg";
 
 export async function action({ params, request }) {
     await deletePost(params.postid);
@@ -15,7 +14,7 @@ export default function DeleteButton({ postId }) {
       <button
         name="delete"
         className="deletebutton"
-      ><img src={Trash}/></button>
+      >&#x1F5D1;</button>
     </fetcher.Form>
   );
 }

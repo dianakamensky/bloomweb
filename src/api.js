@@ -105,6 +105,7 @@ let users = [
   {
     username: "Diana",
     password: "0",
+    bio: "Photographer",
     pfp: "https://www.creativefabrica.com/wp-content/uploads/2021/07/07/1625642389/Fairy-silhouette-580x386.jpg",
     id: 0,
     savedPosts: new Set(),
@@ -112,6 +113,7 @@ let users = [
   {
     username: "Moshe",
     password: "1",
+    bio: "Eater",
     pfp: "https://tools.bard.edu/wwwmedia/pubs/articles/images/1206826/The-Moon-Fairy-Samatar.png",
     id: 1,
     savedPosts: new Set(),
@@ -119,6 +121,7 @@ let users = [
   {
     username: "Lavie",
     password: "2",
+    bio: "Musician",
     pfp: "",
     id: 2,
     savedPosts: new Set(),
@@ -126,6 +129,7 @@ let users = [
   {
     username: "Matan",
     password: "3",
+    bio: "Advanced eater",
     pfp: "",
     id: 3,
     savedPosts: new Set(),
@@ -235,4 +239,12 @@ export async function deletePost(postId) {
   if (postIndex >= 0) {
     posts.splice(postIndex, 1);
   }
+}
+
+export async function editProfile(data) {
+  const user = await getUser();
+  user.pfp = data.profileimage;
+  user.username = data.username;
+  user.bio = data.bio;
+  return;
 }

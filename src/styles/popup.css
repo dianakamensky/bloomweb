@@ -76,3 +76,15 @@
   cursor: pointer;
 }
 
+
+@media all and (min-width: 320px) and (max-width: 500px) {
+
+  .popup__main {
+    width: 75%;
+  }
+ .popup__title {
+  margin-left: 0;
+  text-align: center;
+ }
+
+}

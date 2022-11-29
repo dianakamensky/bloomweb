@@ -1,5 +1,4 @@
 import { useFetcher } from "react-router-dom";
-import { postComment } from "../api";
 
 export default function CommentForm({postId}) {
   const fetcher = useFetcher();

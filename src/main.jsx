@@ -17,6 +17,7 @@ import MyPosts, { loader as myPostsLoader } from "./routes/myposts";
 import Saved, { loader as savedLoader } from "./routes/saved";
 import { action as deletePostAction } from "./components/deletebutton";
 import { action as editProfileAction } from "./routes/editprofile";
+import { ProtectedRoute } from "./hooks/protectedroute";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
             element: <Index />,
             loader: indexLoader,
           },
+          {
+            element: <ProtectedRoute/>,
+            children: [
           {
             path: "/profile",
             element: <Profile />,
@@ -52,7 +56,8 @@ const router = createBrowserRouter([
                 action: editProfileAction,
               }
             ],
-          },
+          }]
+        },
           {
             path: "/signup",
             element: <SignUp />,
@@ -60,7 +65,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/signin",
-            element: <SignIn />,
+            element: <SignIn/>,
             action: signInAction,
             errorElement: <SignIn />,
           },
@@ -71,6 +76,7 @@ const router = createBrowserRouter([
           {
             path: "/:postid/save",
             action: savePostAction,
+            loader: savedLoader,
           },
           {
             path: "/:postid/delete",

@@ -1,9 +1,9 @@
-import { CurrentUserContext } from "../routes/root";
 import React from "react";
 import DeleteButton from "./deletebutton";
+import { getCurrentUser } from "../api";
 
 export default function Post({post, setCurrentPost}) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUserId = getCurrentUser();
   function openPopup() {
     setCurrentPost(post);
   }
@@ -13,7 +13,7 @@ export default function Post({post, setCurrentPost}) {
     <>
     <div className="post" >
       <img className="post__image" src={post.image} onClick={openPopup}></img>
-      {currentUser && currentUser.id === post.ownerId && <DeleteButton postId={post.id}/>}
+      {currentUserId === post.ownerId && <DeleteButton postId={post.id}/>}
     </div>
     
     </>

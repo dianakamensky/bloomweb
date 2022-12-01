@@ -1,20 +1,28 @@
-
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../api";
+import React from "react";
+import { useAuth } from "../hooks/authprovider";
 
 export default function Header() {
-    let signedIn = getCurrentUser();
-    
-    return (
-        <div className="header">
-            <div className="header__main">
-        <Link to="/" className="header__logo"><h1>BloomWeb</h1></Link>
-        </div>
-     
-        <nav className="header__nav">
-        <Link to={`${signedIn ? "/" : "/signin"}`} className="header__nav-link">{`${signedIn ? "Home" : "Sign in"}`}</Link>
-        <Link to={`${signedIn ? "/profile" : "/signup"}`} className="header__nav-link">{`${signedIn ? "Profile" : "Sign up"}`}</Link>
-        </nav>
-        </div>
-    )
+    const {loggedIn} = useAuth();
+
+  return (
+    <div className="header">
+      <div className="header__main">
+        <Link to="/" className="header__logo">
+          <h1>BloomWeb</h1>
+        </Link>
+      </div>
+
+      <nav className="header__nav">
+        <Link
+          to={`${loggedIn() ? "/" : "/signin"}`}
+          className="header__nav-link"
+        >{`${loggedIn() ? "Home" : "Sign in"}`}</Link>
+        <Link
+          to={`${loggedIn() ? "/profile" : "/signup"}`}
+          className="header__nav-link"
+        >{`${loggedIn() ? "Profile" : "Sign up"}`}</Link>
+      </nav>
+    </div>
+  );
 }

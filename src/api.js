@@ -196,7 +196,11 @@ export async function getUser(id = getCurrentUser()) {
 }
 
 export function getCurrentUser() {
-  return Number(localStorage.getItem("userId"));
+  const id = localStorage.getItem("userId");
+  if (id === null) {
+    return undefined;
+  }
+  return Number(id);
 }
 
 export async function signUp(username, password) {
@@ -215,7 +219,6 @@ export async function signUp(username, password) {
 }
 
 export async function signIn(username, password) {
-  localStorage.setItem("userId", undefined);
   const user = users.find(
     (user) => user.username.toLowerCase() === username.toLowerCase()
   );
@@ -223,9 +226,9 @@ export async function signIn(username, password) {
     throw json({ username: "Username doesn't exist" }, { status: 400 });
   }
   if (user.password != password) {
-    throw json({ password: "Password is incorrect"}, {status: 400});
+    throw json({ password: "Password is incorrect" }, { status: 400 });
   }
-  localStorage.setItem("userId", user.id);
+  return json({ userId: user.id });
 }
 
 export async function savePost(data, postId, userId) {
@@ -247,4 +250,9 @@ export async function editProfile(data) {
   user.username = data.username;
   user.bio = data.bio;
   return;
+}
+
+export async function getSavedPosts() {
+  const user = await getUser();
+  return user.savedPosts;
 }

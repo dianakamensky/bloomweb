@@ -1,7 +1,7 @@
 export function getCurrentUser() {
-    const id = localStorage.getItem("userId");
-    if (id === null) {
-      return undefined;
+  const userId = localStorage.getItem("userId");
+    if (userId) {
+      return userId;
     }
-    return Number(id);
+    return null;
   }

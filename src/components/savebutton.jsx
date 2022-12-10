@@ -1,12 +1,11 @@
 import { useFetcher } from "react-router-dom";
 import React from "react";
-import { getCurrentUser } from "../utils";
 import api from "../api";
 import { useLoaderData } from "react-router-dom";
 
 export async function action({ params, request }) {
   const data = Object.fromEntries(await request.formData());
-  await api.savePost(data, params.postid, getCurrentUser());
+  await api.savePost(data, params.postid);
 }
 
 export default function SaveButton({ postId }) {
@@ -21,7 +20,6 @@ export default function SaveButton({ postId }) {
         value={!saved}
         className={`savebutton ${saved ? "savebutton_active" : ""}`}
       ></button>
-      <input type="hidden" name="userid"></input>
     </fetcher.Form>
   );
 }

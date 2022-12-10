@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { useAuth } from "../hooks/authprovider";
+import { getCurrentUser } from "../utils";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
-    const {loggedIn} = useAuth();
+    const [loggedIn, setLoggedIn] = React.useState(false);
+    const location = useLocation();
+    React.useEffect(() => {
+      setLoggedIn(getCurrentUser())
+    }, [location]);
 
   return (
     <div className="header">
@@ -15,13 +20,13 @@ export default function Header() {
 
       <nav className="header__nav">
         <Link
-          to={`${loggedIn() ? "/" : "/signin"}`}
+          to={`${loggedIn ? "/" : "/signin"}`}
           className="header__nav-link"
-        >{`${loggedIn() ? "Home" : "Sign in"}`}</Link>
+        >{`${loggedIn ? "Home" : "Sign in"}`}</Link>
         <Link
-          to={`${loggedIn() ? "/profile" : "/signup"}`}
+          to={`${loggedIn ? "/profile" : "/signup"}`}
           className="header__nav-link"
-        >{`${loggedIn() ? "Profile" : "Sign up"}`}</Link>
+        >{`${loggedIn ? "Profile" : "Sign up"}`}</Link>
       </nav>
     </div>
   );

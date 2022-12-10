@@ -9,7 +9,6 @@ import {
   useRouteError,
 } from "react-router-dom";
 import api from "../api";
-import { useAuth } from "../hooks/authprovider";
 
 export async function action({ params, request }) {
   const data = await request.formData();
@@ -26,6 +25,7 @@ export default function SignIn() {
   const error = useRouteError();
   let usernameError = undefined;
   let passwordError = undefined;
+
   if (isRouteErrorResponse(error)) {
     usernameError = error?.data?.username;
     passwordError = error?.data?.password;
@@ -70,7 +70,5 @@ export default function SignIn() {
     );
   }
 
-  const { login } = useAuth();
-  login(response.userId);
   return <Navigate to="/profile"></Navigate>;
 }

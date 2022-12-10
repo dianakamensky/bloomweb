@@ -3,12 +3,15 @@ import {
   NavLink,
   Outlet,
   redirect,
+  Navigate,
+  useNavigate,
+  useRouteError,
+  isRouteErrorResponse,
 } from "react-router-dom";
 import React from "react";
 import EditPopup from "../components/editpopup";
 import api from "../api";
 import CreatePopup from "../components/createpopup";
-import { useAuth } from "../hooks/authprovider";
 
 export async function loader({ params, request }) {
   const user = await api.getUser();
@@ -27,10 +30,23 @@ export async function action({ params, request }) {
 const saved = true;
 
 export default function Profile() {
-  const { logout } = useAuth();
+
+  const navigate = useNavigate();
+  const error = useRouteError();
   const user = useLoaderData();
+
   const [isCreatePopupOpen, setIsCreatePopupOpen] = React.useState(false);
   const [isEditPopupOpen, setIsEditPopupOpen] = React.useState(false);
+
+  if (isRouteErrorResponse(error)) {
+    return <Navigate to="/signin"></Navigate>;
+  }
+
+  function logout() {
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("userId");
+    navigate("/signin", { replace: true });
+  }
 
   function closeCreatePopup() {
     setIsCreatePopupOpen(false);

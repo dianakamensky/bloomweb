@@ -44,8 +44,8 @@ class Api {
     return this._request("users/profile", "PATCH", data);
   }
 
-  savePost(id) {
-    return this._request(`users/save/${id}`, "PUT");
+  savePost(data, id) {
+    return this._request(`users/save/${id}`, "PUT", data);
   }
 
   getSavedPosts() {

@@ -4,10 +4,10 @@ import api from "../api";
 
 export async function loader() {
   const posts = await api.getSavedPosts();
-  return posts;
+  return posts.savedPosts;
 }
 
 export default function Saved() {
   const posts = useLoaderData();
-  return <Posts posts={posts.savedPosts}></Posts>;
+  return <Posts posts={posts}></Posts>;
 }

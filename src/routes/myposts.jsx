@@ -4,10 +4,10 @@ import api from "../api";
 
 export async function loader() {
   const posts = await api.getUserPosts();
-  return posts;
+  return posts.posts;
 }
 
 export default function MyPosts() {
   const posts = useLoaderData();
-  return <Posts posts={posts.posts}></Posts>;
+  return <Posts posts={posts}></Posts>;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { getCurrentUser } from "../api";
+import { getCurrentUser } from "../utils";
 import Comment from "./comment";
 import CommentForm from "./commentform";
 import SaveButton from "./savebutton";
@@ -14,7 +14,7 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
       {currentUserId != post.ownerId &&
-           <SaveButton postId={post.id}/>}
+           <SaveButton postId={post._id}/>}
         <button className="popup__close-btn" onClick={onClose}></button>
         <div className="postpopup__main">
           <img className="postpopup__img" src={post.image} ref={imgEl}/>
@@ -24,16 +24,16 @@ React.useEffect(() => {popupEl.current.style.height = `${imgEl.current.clientHei
             <div className="postpopup__sidebar-info">
           <Comment
             userId={post.ownerId}
-            content={`${post.flower}, ${post.location}, ${post.date.toDateString()}`}
+            content={`${post.flower}, ${post.location}, ${post.date}`}
           ></Comment>
   
 </div>
           <div className="comments">
             {comments.map((comment) => (
-              <Comment key={comment.id} userId={comment.ownerId} content={comment.content}></Comment>
+              <Comment key={comment._id} userId={comment.ownerId} content={comment.content}></Comment>
             ))}
           </div>
-          <CommentForm postId={post.id}></CommentForm>
+          <CommentForm postId={post._id}></CommentForm>
         </div>
       </div>
     </div>

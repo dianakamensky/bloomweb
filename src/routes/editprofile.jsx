@@ -1,6 +1,6 @@
-import { editProfile } from "../api";
+import api from "../api";
 
-export async function action({params, request}) {
-    const data = await request.formData();
-    await editProfile(Object.fromEntries(data));
-  }
+export async function action({ params, request }) {
+  const data = await request.formData();
+  await api.updateUser(Object.fromEntries(data));
+}

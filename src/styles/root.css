@@ -15,16 +15,14 @@
 @import url("./savebutton.css");
 @import url("./deletebutton.css");
 
-
 :root {
-    --dark: #B22222;
-    --light: #FFE4E1;
-    --medium: rgba(178, 34, 34, 0.5);
-    
-   }
+  --dark: #b22222;
+  --light: #ffe4e1;
+  --medium: rgba(178, 34, 34, 0.5);
+}
 
-   #root {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-   }
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

@@ -12,7 +12,7 @@ export default function Posts({ posts }) {
         {posts.map((post) => (
           <Post
             post={post}
-            key={post.id}
+            key={post._id}
             setCurrentPost={setCurrentPost}
           ></Post>
         ))}

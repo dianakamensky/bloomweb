@@ -1,17 +1,13 @@
 import { useLoaderData } from "react-router-dom";
 import Posts from "../components/posts";
-import { getCurrentUser, getPosts } from "../api";
+import api from "../api";
 
 export async function loader() {
-    const userId = getCurrentUser();
-    const posts = await getPosts({ownerId: userId});
-    return posts;
+  const posts = await api.getUserPosts();
+  return posts;
 }
 
-
 export default function MyPosts() {
-    const posts = useLoaderData();
-    return (
-        <Posts posts={posts}></Posts>
-    )
+  const posts = useLoaderData();
+  return <Posts posts={posts.posts}></Posts>;
 }

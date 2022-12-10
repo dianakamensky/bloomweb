@@ -1,14 +1,25 @@
 import React from "react";
-import { isRouteErrorResponse } from "react-router-dom";
-import { useActionData } from "react-router-dom";
-import { Link, Form, redirect, useRouteError } from "react-router-dom";
-import { signIn } from "../api";
+import {
+  isRouteErrorResponse,
+  Navigate,
+  useActionData,
+  Link,
+  Form,
+  redirect,
+  useRouteError,
+} from "react-router-dom";
+import api from "../api";
 import { useAuth } from "../hooks/authprovider";
 
 export async function action({ params, request }) {
   const data = await request.formData();
   const objData = Object.fromEntries(data);
-  return signIn(objData.username, objData.password);
+  const response = await api.signIn(objData.username, objData.password);
+  if (response.token) {
+    localStorage.setItem("jwt", response.token);
+    localStorage.setItem("userId", response.userId);
+  }
+  return response;
 }
 
 export default function SignIn() {
@@ -19,7 +30,7 @@ export default function SignIn() {
     usernameError = error?.data?.username;
     passwordError = error?.data?.password;
   }
-  
+
   const response = useActionData();
 
   if (response === undefined) {
@@ -61,5 +72,5 @@ export default function SignIn() {
 
   const { login } = useAuth();
   login(response.userId);
-  return redirect("/profile");
+  return <Navigate to="/profile"></Navigate>;
 }

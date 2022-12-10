@@ -1,6 +1,6 @@
-import { postComment } from "../api";
+import api from "../api";
 
-export async function action({params, request}) {
-    const data = await request.formData();
-    await postComment(Object.fromEntries(data), params.postid);
-  }
+export async function action({ params, request }) {
+  const data = await request.formData();
+  await api.createComment(Object.fromEntries(data), params.postid);
+}

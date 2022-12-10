@@ -19,9 +19,8 @@ export default function EditPopup({ onClose, isOpen }) {
             className="input"
             type="link"
             placeholder="Profile image"
-            name="profileimage"
-            id="profileimage"
-            required
+            name="pfp"
+            id="pfp"
           ></input>
           <input
             className="input"
@@ -37,7 +36,7 @@ export default function EditPopup({ onClose, isOpen }) {
             placeholder="Bio"
             name="bio"
             id="bio"
-            required
+            maxLength="200"
           ></input>
           <button className="popup__submitbtn" type="submit">
             Update

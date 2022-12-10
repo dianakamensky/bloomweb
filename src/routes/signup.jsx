@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, redirect, Form } from "react-router-dom";
-import { signUp } from "../api";
+import api from "../api";
 
 export async function action({ params, request }) {
   const data = await request.formData();
   const objData = Object.fromEntries(data);
-  await signUp(objData.username, objData.password);
+  await api.signUp(objData.username, objData.password);
   return redirect("/signin");
 }
 
@@ -20,6 +20,7 @@ export default function SignUp() {
           placeholder="Username"
           name="username"
           id="usernamesignup"
+          maxLength="25"
           required
         />
         <input

@@ -1,13 +1,13 @@
 import { useLoaderData } from "react-router-dom";
-import { getPosts } from "../api";
+import api from "../api";
 import SearchForm from "../components/searchform";
 import Posts from "../components/posts";
 
 export async function loader({ params, request }) {
   const url = new URL(request.url);
   const searchparams = Object.fromEntries(url.searchParams);
-  const posts = await getPosts(searchparams);
-  return posts;
+  const posts = await api.getPosts(searchparams);
+  return posts.data;
 }
 
 export default function Index() {
@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <div className="index">
-   <SearchForm>
+      <SearchForm>
         <input
           className="input"
           placeholder="Flower"

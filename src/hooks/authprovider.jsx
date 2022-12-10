@@ -10,7 +10,7 @@ export function AuthProvider({ children }){
   // call this function when you want to authenticate the user
   async function login(data) {
     setUserId(data);
-    navigate("/profile");
+    //navigate("/profile");
   };
 
   // call this function to sign out logged in user

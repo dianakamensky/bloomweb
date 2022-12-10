@@ -1,15 +1,17 @@
-import {getUser} from "../api";
+import api from "../api";
 import React from "react";
 
 export default function Comment({ userId, content }) {
   const [user, setUser] = React.useState({});
 
   async function getOwnerInfo() {
-    const owner = await getUser(userId);
+    const owner = await api.getUser(userId);
     setUser(owner);
   }
 
-  React.useEffect(() => {getOwnerInfo()}, []);
+  React.useEffect(() => {
+    getOwnerInfo();
+  }, []);
 
   return (
     <div className="comment">

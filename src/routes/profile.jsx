@@ -3,26 +3,25 @@ import {
   NavLink,
   Outlet,
   redirect,
-  Form
 } from "react-router-dom";
 import React from "react";
 import EditPopup from "../components/editpopup";
-import { createPost, getUser } from "../api";
+import api from "../api";
 import CreatePopup from "../components/createpopup";
 import { useAuth } from "../hooks/authprovider";
 
 export async function loader({ params, request }) {
-  const user = await getUser();
+  const user = await api.getUser();
   if (!user) {
     return redirect("/signin");
   }
-  return getUser();
+  return user;
 }
 
 export async function action({ params, request }) {
   let formData = await request.formData();
   const info = Object.fromEntries(formData);
-  return await createPost(info);
+  return await api.createPost(info);
 }
 
 const saved = true;
@@ -79,8 +78,7 @@ export default function Profile() {
               type="submit"
               className="profile__btn"
               onClick={logout}
-            >
-            </button>
+            ></button>
           </div>
         )}
       </div>

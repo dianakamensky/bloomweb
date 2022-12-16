@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
-import Root from "./routes/root";
+import Root, {loader as rootLoader} from "./routes/root";
 import ErrorPage from "./components/error-page";
 import Index, { loader as indexLoader } from "./routes/index";
 import Profile, {
@@ -12,6 +12,7 @@ import Profile, {
 import SignUp, { action as signUpAction } from "./routes/signup";
 import SignIn, { action as signInAction } from "./routes/signin";
 import { action as postCommentAction } from "./routes/postcomment";
+import { loader as postCommentLoader } from "./routes/postcomment";
 import { action as savePostAction } from "./components/savebutton";
 import MyPosts, { loader as myPostsLoader } from "./routes/myposts";
 import Saved, { loader as savedLoader } from "./routes/saved";
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    loader: rootLoader,
     children: [
       {
         errorElement: <ErrorPage />,
@@ -67,6 +69,7 @@ const router = createBrowserRouter([
           {
             path: "/:postid/comment",
             action: postCommentAction,
+            loader: postCommentLoader,
           },
           {
             path: "/:postid/save",

@@ -44,8 +44,12 @@ class Api {
     return this._request("users/profile", "PATCH", data);
   }
 
-  savePost(data, id) {
-    return this._request(`users/save/${id}`, "PUT", data);
+  savePost(id) {
+    return this._request(`users/save/${id}`, "PUT");
+  }
+
+  unsavePost(id) {
+    return this._request(`users/save/${id}`, "DELETE");
   }
 
   getSavedPosts() {
@@ -69,7 +73,7 @@ class Api {
   }
 
   createComment(content, id) {
-    return this._request(`posts/${id}/comments`, "POST", content.comment);
+    return this._request(`posts/${id}/comments`, "POST", content);
   }
 
   createPost(data) {

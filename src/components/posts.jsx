@@ -20,7 +20,6 @@ export default function Posts({ posts }) {
         <PostPopup
           post={currentPost}
           onClose={onClose}
-          comments={currentPost.comments}
         ></PostPopup>
       )}
     </div>

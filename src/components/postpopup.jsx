@@ -1,7 +1,7 @@
 import React from "react";
 import { getCurrentUser } from "../utils";
 import Comment from "./comment";
-import CommentForm from "./commentform";
+import { useFetcher } from "react-router-dom";
 import SaveButton from "./savebutton";
 import api from "../api";
 
@@ -9,13 +9,15 @@ export default function PostPopup({ post, onClose }) {
   const currentUserId = getCurrentUser();
   const popupEl = React.useRef(null);
   const imgEl = React.useRef(null);
+  const fetcher = useFetcher();
+  const [currentPost, setCurrentPost] = React.useState(post);
 
-  const [currentPost, setCurrentPost] = React.useState(null);
-
-  React.useEffect(() => {async function updatePost(){
-    setCurrentPost((await api.getPost(post._id)).data);}
-    updatePost()
-  }, []);
+  React.useEffect(() => {
+    async function updatePost() {
+      setCurrentPost((await api.getPost(post._id)).data);
+    }
+    updatePost();
+  }, [fetcher]);
 
   React.useEffect(() => {
     popupEl.current.style.height = `${imgEl.current.clientHeight}px`;
@@ -44,7 +46,20 @@ export default function PostPopup({ post, onClose }) {
               ></Comment>
             ))}
           </div>
-          <CommentForm postId={post._id}></CommentForm>
+          <fetcher.Form
+            className="commentform"
+            method="post"
+            action={`/${currentPost._id}/comment`}
+          >
+            <input
+              className="commentform__input"
+              placeholder="Leave a comment..."
+              name="comment"
+            ></input>
+            <button className="commentform__submit" type="submit">
+              Post
+            </button>
+          </fetcher.Form>
         </div>
       </div>
     </div>

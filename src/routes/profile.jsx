@@ -12,6 +12,8 @@ import React from "react";
 import EditPopup from "../components/editpopup";
 import api from "../api";
 import CreatePopup from "../components/createpopup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 export async function loader({ params, request }) {
   const user = await api.getUser();
@@ -30,7 +32,6 @@ export async function action({ params, request }) {
 const saved = true;
 
 export default function Profile() {
-
   const navigate = useNavigate();
   const error = useRouteError();
   const user = useLoaderData();
@@ -81,20 +82,18 @@ export default function Profile() {
               className="profile__btn"
               onClick={openCreatePopup}
             >
-              +
+              <i className="fa-solid fa-plus"></i>
             </button>
             <button
               type="button"
               className="profile__btn"
               onClick={openEditPopup}
             >
-              &#x1F589;
-            </button>{" "}
-            <button
-              type="submit"
-              className="profile__btn"
-              onClick={logout}
-            ></button>
+              <i className="fa-solid fa-user-pen"></i>
+            </button>
+            <button type="submit" className="profile__btn" onClick={logout}>
+              <i className="fa-solid fa-right-from-bracket"></i>
+            </button>
           </div>
         )}
       </div>
@@ -121,7 +120,7 @@ export default function Profile() {
       <Outlet />
 
       <CreatePopup onClose={closeCreatePopup} isOpen={isCreatePopupOpen} />
-      <EditPopup onClose={closeEditPopup} isOpen={isEditPopupOpen} />
+      <EditPopup username={user.username} onClose={closeEditPopup} isOpen={isEditPopupOpen} />
     </main>
   );
 }

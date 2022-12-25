@@ -16,7 +16,7 @@ export default function DeleteButton({ postId }) {
       action={`/${postId}/delete`}
     >
       <button name="delete" className="deletebutton">
-        &#x1F5D1;
+      <i className="fa-solid fa-trash"></i>
       </button>
     </fetcher.Form>
   );

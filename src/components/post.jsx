@@ -15,7 +15,7 @@ export default function Post({post, setCurrentPost}) {
     <>
     <div className="post" >
       <img className="post__image" src={post.image} onClick={openPopup}></img>
-      {currentUserId === post.ownerId && <DeleteButton postId={post._id}/>}
+      {currentUserId === post.owner && <DeleteButton postId={post._id}/>}
     </div>
     
     </>

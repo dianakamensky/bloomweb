@@ -23,6 +23,12 @@ input[type="date"] {
   padding-left: 5px;
 }
 
+input[type="text"] {
+  color: var(--dark);
+  font-weight: 400px;
+  padding-left: 5px;
+}
+
 .dateinput {
   display: flex;
   column-gap: 10px;

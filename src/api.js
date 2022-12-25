@@ -82,7 +82,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:3000",
+  //baseUrl: "http://localhost:3000",
+  baseUrl: "http://bloomweb.verymad.net/api",
   headers: {
     "Content-Type": "application/json",
   },

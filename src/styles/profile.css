@@ -40,9 +40,7 @@
 
 .profile__btn {
     border: none;
-    width: 25px;
-    height: 25px;
-    padding: 3px;
+    padding: 5px;
     background-color: var(--dark);
     color: var(--light);
     border-radius: 5px;

@@ -1,8 +1,22 @@
 import { useFetcher } from "react-router-dom";
 import React from "react";
 
-export default function EditPopup({ onClose, isOpen }) {
+export default function EditPopup({ username, pfp, bio, onClose, isOpen }) {
   const fetcher = useFetcher();
+
+  const [name, setName] = React.useState(username);
+  const [image, setImage] = React.useState(pfp);
+  const [description, setDescription] = React.useState(bio);
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+  function handleImageChange(e) {
+    setImage(e.target.value);
+  }
+  function handleDescriptionChange(e) {
+    setDescription(e.target.value);
+  }
 
   return (
     <div className={`popup ${isOpen && "popup_open"}`}>
@@ -20,7 +34,9 @@ export default function EditPopup({ onClose, isOpen }) {
             type="link"
             placeholder="Profile image"
             name="pfp"
-            id="pfp"
+            id="pfp" 
+            value={image}
+            onChange={handleImageChange}
           ></input>
           <input
             className="input"
@@ -28,6 +44,8 @@ export default function EditPopup({ onClose, isOpen }) {
             placeholder="Username"
             name="username"
             id="username"
+            onChange={handleNameChange}
+            value={name}
             required
           ></input>
           <input
@@ -37,6 +55,8 @@ export default function EditPopup({ onClose, isOpen }) {
             name="bio"
             id="bio"
             maxLength="200"
+            value={description}
+            onChange={handleDescriptionChange}
           ></input>
           <button className="popup__submitbtn" type="submit">
             Update

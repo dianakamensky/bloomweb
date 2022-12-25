@@ -1,5 +1,5 @@
 import React from "react";
-import { getCurrentUser } from "../utils";
+import { getCurrentUser, withCommas } from "../utils";
 import Comment from "./comment";
 import { useFetcher } from "react-router-dom";
 import SaveButton from "./savebutton";
@@ -22,6 +22,10 @@ export default function PostPopup({ post, onClose }) {
   React.useEffect(() => {
     popupEl.current.style.height = `${imgEl.current.clientHeight}px`;
   }, []);
+
+  let date = new Date(post.date);
+  date = date.toLocaleDateString();
+
   return (
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
@@ -34,7 +38,7 @@ export default function PostPopup({ post, onClose }) {
           <div className="postpopup__sidebar-info">
             <Comment
               userId={post.ownerId}
-              content={`${post.flower}, ${post.location}, ${post.date}`}
+              content={withCommas([post.flower, post.location, date])}
             ></Comment>
           </div>
           <div className="comments">

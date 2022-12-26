@@ -53,7 +53,8 @@ class Api {
   }
 
   getSavedPosts() {
-    return this._request("users/profile/saved", "GET");
+   return this._request("users/profile/saved", "GET");
+    
   }
 
   getUserPosts() {
@@ -82,8 +83,8 @@ class Api {
 }
 
 const api = new Api({
-  //baseUrl: "http://localhost:3000",
-  baseUrl: "http://bloomweb.verymad.net/api",
+  baseUrl: "http://localhost:3000",
+  //baseUrl: "http://bloomweb.verymad.net/api",
   headers: {
     "Content-Type": "application/json",
   },

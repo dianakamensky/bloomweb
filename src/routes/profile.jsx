@@ -69,7 +69,11 @@ export default function Profile() {
     <main className="profile">
       <div className="profile__top-section">
         <div className="profile__info">
-          <img className="profile__pic" src={user.pfp}></img>
+          {user.pfp ? (
+            <img className="profile__pic" src={user.pfp} />
+          ) : (
+            <i className="fa-solid fa-user"></i>
+          )}
           <div>
             <h2 className="profile__name">{user.username}</h2>
             <p className="profile__bio">{user.bio}</p>
@@ -120,7 +124,13 @@ export default function Profile() {
       <Outlet />
 
       <CreatePopup onClose={closeCreatePopup} isOpen={isCreatePopupOpen} />
-      <EditPopup username={user.username} onClose={closeEditPopup} isOpen={isEditPopupOpen} />
+      <EditPopup
+        username={user.username}
+        pfp={user.pfp}
+        bio={user.bio}
+        onClose={closeEditPopup}
+        isOpen={isEditPopupOpen}
+      />
     </main>
   );
 }

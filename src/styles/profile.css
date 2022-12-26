@@ -69,6 +69,13 @@
     border-top: 2px solid var(--dark);
 }
 
+.fa-user {
+    font-size: 122px;
+    border: 1px solid var(--dark);
+    border-radius: 50%;
+    padding: 30px 39px;
+}
+
 
 @media all and (min-width: 320px) and (max-width: 600px) {
 .profile__info {

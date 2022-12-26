@@ -29,7 +29,7 @@ export default function PostPopup({ post, onClose }) {
   return (
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
-        {currentUserId != post.ownerId && <SaveButton postId={post._id} />}
+        {currentUserId != post.owner && <SaveButton postId={post._id} />}
         <button className="popup__close-btn" onClick={onClose}></button>
         <div className="postpopup__main">
           <img className="postpopup__img" src={post.image} ref={imgEl} />
@@ -37,7 +37,7 @@ export default function PostPopup({ post, onClose }) {
         <div className="postpopup__sidebar">
           <div className="postpopup__sidebar-info">
             <Comment
-              userId={post.ownerId}
+              userId={post.owner}
               content={withCommas([post.flower, post.location, date])}
             ></Comment>
           </div>

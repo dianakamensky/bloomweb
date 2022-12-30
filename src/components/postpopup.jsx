@@ -11,6 +11,15 @@ export default function PostPopup({ post, onClose }) {
   const imgEl = React.useRef(null);
   const fetcher = useFetcher();
   const [currentPost, setCurrentPost] = React.useState(post);
+  const [commentInput, setCommentInput] = React.useState("");
+
+  function handleCommentInputChange(e) {
+    setCommentInput(e.target.value);
+  }
+
+  function handleCommentSubmit(e) {
+    setCommentInput("");
+  }
 
   React.useEffect(() => {
     async function updatePost() {
@@ -29,7 +38,7 @@ export default function PostPopup({ post, onClose }) {
   return (
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
-        {currentUserId != post.owner && <SaveButton postId={post._id} />}
+        {currentUserId != post.owner && <SaveButton postId={post._id} user={currentUserId} />}
         <button className="popup__close-btn" onClick={onClose}></button>
         <div className="postpopup__main">
           <img className="postpopup__img" src={post.image} ref={imgEl} />
@@ -45,7 +54,7 @@ export default function PostPopup({ post, onClose }) {
             {currentPost?.comments?.map((comment) => (
               <Comment
                 key={comment._id}
-                userId={comment.ownerId}
+                userId={comment.owner}
                 content={comment.content}
               ></Comment>
             ))}
@@ -54,15 +63,19 @@ export default function PostPopup({ post, onClose }) {
             className="commentform"
             method="post"
             action={`/${currentPost._id}/comment`}
+            onSubmit={handleCommentSubmit}
           >
             <input
               className="commentform__input"
               placeholder="Leave a comment..."
               name="comment"
+              value={commentInput}
+              onChange={handleCommentInputChange}
             ></input>
-            <button className="commentform__submit" type="submit">
+            <button disabled={commentInput === ""} className="commentform__submit" type="submit">
               Post
             </button>
+            {!currentUserId && (<p className="tooltip">Sign in to post comments</p>)}
           </fetcher.Form>
         </div>
       </div>

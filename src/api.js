@@ -24,6 +24,10 @@ class Api {
       if (res.ok) {
         return res.json();
       }
+      if (res.status === 401) {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("jwt");
+      }
       return Promise.reject(res);
     });
   }
@@ -38,6 +42,10 @@ class Api {
 
   getUser() {
     return this._request("users/profile", "GET");
+  }
+
+  getUserById(id) {
+    return this._request(`users/user/${id}`, "GET");
   }
 
   updateUser(data) {

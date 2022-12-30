@@ -15,7 +15,7 @@ import { action as postCommentAction } from "./routes/postcomment";
 import { loader as postCommentLoader } from "./routes/postcomment";
 import { action as savePostAction } from "./components/savebutton";
 import MyPosts, { loader as myPostsLoader } from "./routes/myposts";
-import Saved, { loader as savedLoader } from "./routes/saved";
+import Saved from "./routes/saved";
 import { action as deletePostAction } from "./components/deletebutton";
 import { action as editProfileAction } from "./routes/editprofile";
 
@@ -47,7 +47,6 @@ const router = createBrowserRouter([
               {
                 path: "saved",
                 element: <Saved />,
-                loader: savedLoader,
               },
               {
                 path: "edit",
@@ -74,7 +73,6 @@ const router = createBrowserRouter([
           {
             path: "/:postid/save",
             action: savePostAction,
-            loader: savedLoader,
           },
           {
             path: "/:postid/delete",

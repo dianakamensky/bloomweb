@@ -13,10 +13,10 @@ export async function action({ params, request }) {
   }
 }
 
-export default function SaveButton({ postId }) {
+export default function SaveButton({ postId, user }) {
   const fetcher = useFetcher();
   const savedPosts = React.useContext(SavedPostsContext);
-  const saved = savedPosts.savedPosts.some((post) => post._id === postId);
+  const saved = savedPosts.some((post) => post._id === postId);
 
   return (
     <fetcher.Form method="put" className="saveform" action={`/${postId}/save`}>
@@ -25,6 +25,7 @@ export default function SaveButton({ postId }) {
         value={!saved}
         className={`savebutton ${saved ? "savebutton_active" : ""}`}
       ></button>
+      {!user && (<p className="tooltip">Sign in to save posts</p>)}
     </fetcher.Form>
   );
 }

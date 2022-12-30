@@ -7,11 +7,22 @@
   padding: 0;
   height: 30px;
   width: 30px;
+
+}
+
+.saveform {
   position: absolute;
   top: -28px;
   left: -28px;
+  width: 100%;
 }
 
 .savebutton_active {
   opacity: 2;
 }
+
+.savebutton:hover {
+  cursor: pointer;
+}
+
+

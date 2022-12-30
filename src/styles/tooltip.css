@@ -1,0 +1,14 @@
+.tooltip {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  margin: 0;
+  background-color: var(--light);
+  color: var(--dark);
+  font-size: 13px; 
+  font-weight: 800;
+}
+
+*:hover + .tooltip {
+    display: inline-block;
+  }

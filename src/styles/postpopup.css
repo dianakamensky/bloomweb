@@ -48,6 +48,10 @@
   align-items: center;
 }
 
+.commentform__submit:disabled {
+  opacity: 0.5;
+}
+
 @media all and (min-width: 320px) and (max-width: 800px) {
   .postpopup {
     width: 80%;

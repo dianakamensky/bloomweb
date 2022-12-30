@@ -14,6 +14,7 @@
 @import url("./body.css");
 @import url("./savebutton.css");
 @import url("./deletebutton.css");
+@import url("./tooltip.css");
 
 :root {
   --dark: #b22222;

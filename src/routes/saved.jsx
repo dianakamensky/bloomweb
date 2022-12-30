@@ -1,13 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import Posts from "../components/posts";
-import api from "../api";
-
-export async function loader() {
-  const posts = await api.getSavedPosts();
-  return posts.savedPosts;
-}
+import React from "react";
+import { SavedPostsContext } from "../routes/root";
 
 export default function Saved() {
-  const posts = useLoaderData();
-  return <Posts posts={posts}></Posts>;
+  const savedPosts = React.useContext(SavedPostsContext);
+  return <Posts posts={savedPosts}></Posts>;
 }

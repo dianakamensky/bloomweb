@@ -52,10 +52,6 @@
   .header__nav {
     margin-right: 2%;
   }
-
-  .header__main {
-    margin-left: 2%;
-  }
 }
 
 @media all and (min-width: 440px) and (max-width: 599px) {

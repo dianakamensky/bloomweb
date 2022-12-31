@@ -10,6 +10,14 @@ export async function action({ params, request }) {
 }
 
 export default function SignUp() {
+
+  const error = useRouteError();
+  let errorMessage = undefined;
+
+  if (isRouteErrorResponse(error)) {
+    errorMessage = error?.data?.message;
+  }
+
   return (
     <main className="signin">
       <h1 className="signin__title">Sign up to BloomWeb.</h1>
@@ -33,6 +41,7 @@ export default function SignUp() {
           maxLength="20"
           required
         />
+        {errorMessage && <div className="input__error">{errorMessage}</div>}
         <button className="submitbtn" type="submit">
           Sign up
         </button>

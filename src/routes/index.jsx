@@ -5,7 +5,12 @@ import Posts from "../components/posts";
 
 export async function loader({ params, request }) {
   const url = new URL(request.url);
-  const searchparams = Object.fromEntries(url.searchParams);
+  const searchparams = {};
+  url.searchParams.forEach((input, param) => {
+    if (input && input != "") {
+      searchparams[param] = input;
+    }
+  })
   const posts = await api.getPosts(searchparams);
   return posts.data;
 }

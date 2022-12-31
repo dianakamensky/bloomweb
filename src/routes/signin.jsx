@@ -23,12 +23,10 @@ export async function action({ params, request }) {
 
 export default function SignIn() {
   const error = useRouteError();
-  let usernameError = undefined;
-  let passwordError = undefined;
+  let errorMessage = undefined;
 
   if (isRouteErrorResponse(error)) {
-    usernameError = error?.data?.username;
-    passwordError = error?.data?.password;
+    errorMessage = error?.data?.message;
   }
 
   const response = useActionData();
@@ -37,7 +35,7 @@ export default function SignIn() {
     return (
       <main className="signin">
         <h1 className="signin__title">Sign in to your account.</h1>
-        <Form className="signin__form" method="post">
+        <Form className="signin__form" method="post" action="/signin">
           <input
             className="input"
             type="text"
@@ -46,7 +44,6 @@ export default function SignIn() {
             id="usernamesignup"
             required
           />
-          {usernameError && <div className="input__error">{usernameError}</div>}
           <input
             className="input"
             type="password"
@@ -55,7 +52,7 @@ export default function SignIn() {
             id="passwordsignup"
             required
           />
-          {passwordError && <div className="input__error">{passwordError}</div>}
+           {errorMessage && <div className="input__error">{errorMessage}</div>}
           <button className="submitbtn" type="submit">
             Sign in
           </button>

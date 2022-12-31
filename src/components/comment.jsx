@@ -5,6 +5,7 @@ export default function Comment({ userId, content }) {
   const [user, setUser] = React.useState({});
 
   async function getOwnerInfo() {
+    if (!userId) return;
     const owner = await api.getUserById(userId);
     setUser(owner);
   }

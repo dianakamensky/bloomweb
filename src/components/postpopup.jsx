@@ -67,7 +67,7 @@ export default function PostPopup({ post, onClose }) {
           >
             <input
               className="commentform__input"
-              placeholder="Leave a comment..."
+              placeholder={currentUserId ? "Leave a comment..." : "Sign in to post comments"}
               name="comment"
               value={commentInput}
               onChange={handleCommentInputChange}
@@ -75,7 +75,6 @@ export default function PostPopup({ post, onClose }) {
             <button disabled={commentInput === ""} className="commentform__submit" type="submit">
               Post
             </button>
-            {!currentUserId && (<p className="tooltip">Sign in to post comments</p>)}
           </fetcher.Form>
         </div>
       </div>

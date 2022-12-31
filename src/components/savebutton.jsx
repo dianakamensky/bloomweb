@@ -6,9 +6,8 @@ import { SavedPostsContext } from "../routes/root";
 export async function action({ params, request }) {
   const data = Object.fromEntries(await request.formData());
   if (data.save === "true") {
-  api.savePost(params.postid)
-  }
-  else {
+    api.savePost(params.postid);
+  } else {
     api.unsavePost(params.postid);
   }
 }
@@ -23,9 +22,15 @@ export default function SaveButton({ postId, user }) {
       <button
         name="save"
         value={!saved}
-        className={`savebutton ${saved ? "savebutton_active" : ""}`}
-      ></button>
-      {!user && (<p className="tooltip">Sign in to save posts</p>)}
+        className="savebutton"
+      >
+        {saved ? (
+          <i class="fa-solid fa-bookmark"></i>
+        ) : (
+          <i class="fa-regular fa-bookmark"></i>
+        )}
+      </button>
+      {!user && <p className="tooltip">Sign in to save posts</p>}
     </fetcher.Form>
   );
 }

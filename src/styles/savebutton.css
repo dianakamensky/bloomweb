@@ -1,24 +1,21 @@
 .savebutton {
   background: none;
-  background-image: url("../images/save.svg");
-  opacity: 0.5;
   background-size: cover;
   border: none;
   padding: 0;
-  height: 30px;
-  width: 30px;
-
+  font-size: 20px;
+  color: var(--light);
+  background-color: var(--dark);
+  padding: 4px;
+  padding-bottom: 0;
+  border-radius: 3px;
 }
 
 .saveform {
   position: absolute;
-  top: -28px;
-  left: -28px;
+  top: -25px;
+  left: -25px;
   width: 100%;
-}
-
-.savebutton_active {
-  opacity: 2;
 }
 
 .savebutton:hover {

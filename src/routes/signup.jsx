@@ -1,11 +1,11 @@
 import React from "react";
-import { Link, redirect, Form, useRouteError, isRouteErrorResponse } from "react-router-dom";
+import { Link, redirect, Form, useActionData, useRouteError, isRouteErrorResponse } from "react-router-dom";
 import api from "../api";
 
 export async function action({ params, request }) {
   const data = await request.formData();
   const objData = Object.fromEntries(data);
-  await api.signUp(objData.username, objData.password);
+  const response = await api.signUp(objData.username, objData.password);
   return redirect("/signin");
 }
 

@@ -44,16 +44,15 @@
 
 .popup__close-btn {
   position: absolute;
-  top: -28px;
-  right: -28px;
+  top: -25px;
+  right: -25px;
   padding: 0;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   height: 22px;
   width: 22px;
-  background-image: url("../images/closeicon.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  font-size: 30px;
+  color: var(--light);
 }
 
 .popup__close-btn:hover {

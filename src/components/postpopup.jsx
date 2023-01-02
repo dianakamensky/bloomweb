@@ -39,7 +39,9 @@ export default function PostPopup({ post, onClose }) {
     <div className="popup popup_open">
       <div className="postpopup" ref={popupEl}>
         {currentUserId != post.owner && <SaveButton postId={post._id} user={currentUserId} />}
-        <button className="popup__close-btn" onClick={onClose}></button>
+        <button className="popup__close-btn" onClick={onClose}>
+        <i class="fa-solid fa-xmark"></i>
+        </button>
         <div className="postpopup__main">
           <img className="postpopup__img" src={post.image} ref={imgEl} />
         </div>

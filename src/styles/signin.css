@@ -21,6 +21,10 @@
   font-size: 17px;
 }
 
+.submitbtn:hover {
+   cursor: pointer;
+}
+
 .signin__alt {
   text-align: center;
   font-size: 14px;

@@ -21,7 +21,9 @@ export default function EditPopup({ username, pfp, bio, onClose, isOpen }) {
   return (
     <div className={`popup ${isOpen && "popup_open"}`}>
       <div className="popup__main">
-        <button className="popup__close-btn" onClick={onClose}></button>
+        <button className="popup__close-btn" onClick={onClose}>
+        <i class="fa-solid fa-xmark"></i>
+        </button>
         <h1 className="popup__title">Edit your profile</h1>
         <fetcher.Form
           className="popup__form"
